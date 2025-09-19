@@ -93,42 +93,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // contact
-
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("contactForm");
+  const contactForm = document.getElementById("contactForm");
   const feedback = document.getElementById("formFeedback");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    feedback.textContent = "Sending...";
-    feedback.style.color = "#333";
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault(); // stop page reload
 
-    const data = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      subject: form.subject.value.trim(),
-      message: form.message.value.trim()
+    feedback.textContent = "⏳ Sending...";
+    feedback.className = "form-feedback pending";
+
+    const formData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      subject: document.getElementById("subject").value,
+      message: document.getElementById("message").value,
     };
 
     try {
       const res = await fetch("/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        body: JSON.stringify(formData),
       });
-      const result = await res.json();
 
-      if (res.ok && result.success) {
+      const data = await res.json();
+
+      if (data.success) {
         feedback.textContent = "✅ Message sent successfully!";
-        feedback.style.color = "green";
-        form.reset();
+        feedback.className = "form-feedback success";
+        contactForm.reset();
       } else {
-        feedback.textContent = result.error || "❌ Failed to send.";
-        feedback.style.color = "crimson";
+        feedback.textContent = `❌ ${data.error || "Failed to send message."}`;
+        feedback.className = "form-feedback error";
       }
     } catch (err) {
-      feedback.textContent = "❌ Network error.";
-      feedback.style.color = "crimson";
+      feedback.textContent = "❌ Network error. Try again later.";
+      feedback.className = "form-feedback error";
     }
   });
 });

@@ -6,6 +6,59 @@
   <title>Tourist Places - Odisha</title>
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/script.js" defer></script>
+  <style>
+    .card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 8px;
+      width: 300px;
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+      background: #fdfdfd;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .explore-btn {
+      margin-top: 10px;
+      padding: 8px 14px;
+      background: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .explore-btn:hover {
+      background: #005fa3;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      width: 70%;
+      max-height: 80%;
+      overflow-y: auto;
+      border-radius: 8px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .close {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <!-- Navbar -->
@@ -25,40 +78,78 @@
   <section class="places">
     <h2>Famous Tourist Spots</h2>
     <div class="cards-container">
-      
-      <!-- Card 1: Puri Jagannath Temple -->
-      <div class="card">
-        <div class="slider">
-          <img src="https://t4.ftcdn.net/jpg/04/82/09/83/240_F_482098383_n6JMrdv1bBwHYXX27qQGalGJ97xa1eK2.jpg" class="slide active">
-          <img src="https://as1.ftcdn.net/v2/jpg/04/71/22/96/1000_F_471229696_gBayPOEBrWbvhTq0vig3mvo6t6UgIhuF.jpg" class="slide">
-          <img src="https://t4.ftcdn.net/jpg/04/82/09/83/240_F_482098383_n6JMrdv1bBwHYXX27qQGalGJ97xa1eK2.jpg" class="slide">
-        </div>
-        <h3>Puri Jagannath Temple</h3>
-        <p>One of the Char Dham pilgrimage sites, Puri is famous for the Jagannath Temple and Rath Yatra.</p>
-      </div>
 
-      <!-- Card 2: Konark Sun Temple -->
-      <div class="card">
-        <div class="slider">
-          <img src="https://images.unsplash.com/photo-1706790574525-d218c4c52b5c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide active">
-          <img src="https://images.unsplash.com/photo-1706790574525-d218c4c52b5c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Konark_Sun_Temple_Front_View.jpg" class="slide">
-        </div>
-        <h3>Konark Sun Temple</h3>
-        <p>A UNESCO World Heritage Site, the 13th-century Sun Temple is known for its magnificent stone carvings.</p>
-      </div>
-
-      <!-- Card 3: Chilika Lake -->
-      <div class="card">
-        <div class="slider">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Chilika_Lake_Odisha.jpg" class="slide active">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Boating_in_Chilika_Lake.jpg" class="slide">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Birds_in_Chilika_Lake.jpg" class="slide">
-        </div>
-        <h3>Chilika Lake</h3>
-        <p>Asia’s largest brackish water lagoon, famous for migratory birds and dolphin sightings.</p>
-      </div>
+      <!-- Generate 23 cards -->
+      <div class="card"><h3>Puri Jagannath Temple</h3><p>One of the Char Dham pilgrimage sites.</p><button class="explore-btn" onclick="openModal('puri')">Explore</button></div>
+      <div class="card"><h3>Konark Sun Temple</h3><p>A UNESCO World Heritage Site.</p><button class="explore-btn" onclick="openModal('konark')">Explore</button></div>
+      <div class="card"><h3>Chilika Lake</h3><p>Asia’s largest brackish water lagoon.</p><button class="explore-btn" onclick="openModal('chilika')">Explore</button></div>
+      <div class="card"><h3>Dhauli Shanti Stupa</h3><p>Historic site of the Kalinga War.</p><button class="explore-btn" onclick="openModal('dhauli')">Explore</button></div>
+      <div class="card"><h3>Lingaraj Temple</h3><p>Oldest temple in Bhubaneswar.</p><button class="explore-btn" onclick="openModal('lingaraj')">Explore</button></div>
+      <div class="card"><h3>Udayagiri & Khandagiri</h3><p>Ancient Jain rock-cut caves.</p><button class="explore-btn" onclick="openModal('udaya')">Explore</button></div>
+      <div class="card"><h3>Similipal National Park</h3><p>A biosphere reserve with wildlife.</p><button class="explore-btn" onclick="openModal('similipal')">Explore</button></div>
+      <div class="card"><h3>Nandankanan Zoo</h3><p>Famous for white tigers.</p><button class="explore-btn" onclick="openModal('nandan')">Explore</button></div>
+      <div class="card"><h3>Hirakud Dam</h3><p>One of the longest dams in the world.</p><button class="explore-btn" onclick="openModal('hirakud')">Explore</button></div>
+      <div class="card"><h3>Satkosia Gorge</h3><p>Scenic wildlife sanctuary.</p><button class="explore-btn" onclick="openModal('satkosia')">Explore</button></div>
+      <div class="card"><h3>Raghurajpur Village</h3><p>Heritage crafts village.</p><button class="explore-btn" onclick="openModal('raghu')">Explore</button></div>
+      <div class="card"><h3>Chandrabhaga Beach</h3><p>Famous for sunrise views.</p><button class="explore-btn" onclick="openModal('chandra')">Explore</button></div>
+      <div class="card"><h3>Gopalpur Beach</h3><p>Peaceful beach town.</p><button class="explore-btn" onclick="openModal('gopal')">Explore</button></div>
+      <div class="card"><h3>Bhitarkanika Park</h3><p>Famous for saltwater crocodiles.</p><button class="explore-btn" onclick="openModal('bhitar')">Explore</button></div>
+      <div class="card"><h3>Taratarini Temple</h3><p>Sacred shrine near Berhampur.</p><button class="explore-btn" onclick="openModal('tara')">Explore</button></div>
+      <div class="card"><h3>Khandadhar Waterfall</h3><p>One of the highest waterfalls.</p><button class="explore-btn" onclick="openModal('khandadhar')">Explore</button></div>
+      <div class="card"><h3>Duduma Waterfall</h3><p>Majestic fall in Koraput.</p><button class="explore-btn" onclick="openModal('duduma')">Explore</button></div>
+      <div class="card"><h3>Harishankar & Gandhamardan</h3><p>Religious and natural site.</p><button class="explore-btn" onclick="openModal('hari')">Explore</button></div>
+      <div class="card"><h3>Gupteswar Cave Temple</h3><p>Shiva temple inside cave.</p><button class="explore-btn" onclick="openModal('gupteswar')">Explore</button></div>
+      <div class="card"><h3>Kapilash Temple</h3><p>Hill temple with views.</p><button class="explore-btn" onclick="openModal('kapilash')">Explore</button></div>
+      <div class="card"><h3>Samaleswari Temple</h3><p>Presiding deity of Sambalpur.</p><button class="explore-btn" onclick="openModal('samaleswari')">Explore</button></div>
+      <div class="card"><h3>Chandipur Beach</h3><p>Unique receding sea beach.</p><button class="explore-btn" onclick="openModal('chandipur')">Explore</button></div>
+      <div class="card"><h3>Tikarpada Sanctuary</h3><p>Known for gharial conservation.</p><button class="explore-btn" onclick="openModal('tikar')">Explore</button></div>
     </div>
   </section>
+
+  <!-- Modal -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDetails"></p>
+    </div>
+  </div>
+
+  <script>
+    const details = {
+      puri: {title:"Puri Jagannath Temple",text:"One of the Char Dham pilgrimage sites... (long details about temple, Rath Yatra, Mahaprasad, history)."},
+      konark: {title:"Konark Sun Temple",text:"13th-century chariot-shaped temple dedicated to the Sun God..."},
+      chilika: {title:"Chilika Lake",text:"Asia’s largest brackish lagoon, famous for birds and dolphins..."},
+      dhauli: {title:"Dhauli Shanti Stupa",text:"Site of Kalinga War, Ashokan edicts, Peace Pagoda..."},
+      lingaraj: {title:"Lingaraj Temple",text:"One of the oldest and largest temples dedicated to Lord Shiva..."},
+      udaya: {title:"Udayagiri & Khandagiri",text:"Ancient Jain rock-cut caves with carvings and inscriptions..."},
+      similipal: {title:"Similipal National Park",text:"A biosphere reserve with tigers, elephants, waterfalls..."},
+      nandan: {title:"Nandankanan Zoo",text:"Renowned for white tigers and botanical garden..."},
+      hirakud: {title:"Hirakud Dam",text:"World’s longest earthen dam on Mahanadi, scenic views..."},
+      satkosia: {title:"Satkosia Gorge",text:"Wildlife sanctuary with river gorge, crocodiles, birds..."},
+      raghu: {title:"Raghurajpur Village",text:"Heritage crafts village famous for Pattachitra painting..."},
+      chandra: {title:"Chandrabhaga Beach",text:"Famous for sunrise, cultural festivals near Konark..."},
+      gopal: {title:"Gopalpur Beach",text:"Peaceful coastal town, seafood, colonial charm..."},
+      bhitar: {title:"Bhitarkanika Park",text:"Mangroves, crocodiles, migratory birds, boat rides..."},
+      tara: {title:"Taratarini Temple",text:"Sacred Shakti Peetha on hilltop near Berhampur..."},
+      khandadhar: {title:"Khandadhar Waterfall",text:"Tall cascading fall in Sundargarh amidst forests..."},
+      duduma: {title:"Duduma Waterfall",text:"Majestic fall in Koraput, hydroelectric project site..."},
+      hari: {title:"Harishankar & Gandhamardan",text:"Religious spot with scenic hills and medicinal plants..."},
+      gupteswar: {title:"Gupteswar Cave Temple",text:"Shiva temple inside limestone cave, pilgrimage site..."},
+      kapilash: {title:"Kapilash Temple",text:"Hilltop temple dedicated to Lord Shiva with views..."},
+      samaleswari: {title:"Samaleswari Temple",text:"Presiding deity of Sambalpur, cultural hub..."},
+      chandipur: {title:"Chandipur Beach",text:"Unique beach where sea recedes 5 km at low tide..."},
+      tikar: {title:"Tikarpada Sanctuary",text:"Known for gharial conservation and Satkosia views..."}
+    };
+
+    function openModal(place) {
+      document.getElementById('modalTitle').innerText = details[place].title;
+      document.getElementById('modalDetails').innerText = details[place].text;
+      document.getElementById('infoModal').style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById('infoModal').style.display = "none";
+    }
+  </script>
 </body>
 </html>

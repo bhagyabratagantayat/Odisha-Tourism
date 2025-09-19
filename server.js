@@ -1,24 +1,25 @@
 const express = require('express');
 const axios = require('axios');
+const nodemailer = require("nodemailer");
+require("dotenv").config(); // load .env
+
 const app = express();
 const PORT = 5000;
-
-const nodemailer = require("nodemailer");
-require("dotenv").config(); // if using .env file
-
-
 
 // Middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // 👈 for JSON (contact form AJAX)
+app.use(express.json()); // for JSON (contact form AJAX)
 app.set('view engine', 'ejs');
 
-// Routes
+// ================= ROUTES ================= //
+
+// Home Page
 app.get('/', (req, res) => {
   res.render('index', { error: null });
 });
 
+// Search Wikipedia Place
 app.post('/search', async (req, res) => {
   const city = req.body.city;
   if (!city) {
@@ -30,72 +31,85 @@ app.post('/search', async (req, res) => {
     const response = await axios.get(wikiUrl);
     const data = response.data;
 
-    // If Wikipedia does not have a page
     if (data.type === "disambiguation" || !data.extract) {
       return res.render('index', { error: "No results found. Try another place." });
     }
 
     res.render('result', { data });
   } catch (err) {
+    console.error("❌ Wiki API error:", err.message);
     res.render('index', { error: "Error fetching data. Try again later." });
   }
 });
 
-// Tourist places page
+// Tourist Places Page
 app.get('/places', (req, res) => {
   res.render('places');
 });
 
-// conact 
-app.get('/contact', (req, res) => {
-  res.render('contact', { error: null });
+// Contact Page (GET)
+app.get("/contact", (req, res) => {
+  res.render("contact", {
+    title: "Contact Us - Odisha Tourism",
+  });
 });
 
-app.post('/contact', (req, res) => {
+// Contact Form Submission (POST)
+app.post("/contact", async (req, res) => {
   const { name, email, subject, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ success: false, error: "Name, email, and message are required." });
+    return res
+      .status(400)
+      .json({ success: false, error: "Name, email, and message are required." });
   }
 
-  // log for now (can replace with Nodemailer or DB later)
-  console.log("📩 Contact form:", { name, email, subject, message });
-
-  return res.json({ success: true });
-});
- 
-// test  
-/* OPTIONAL: Nodemailer example (commented)
-const nodemailer = require('nodemailer');
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  try {
+    // Setup mail transporter (using Gmail + App Password)
+    const transporter = nodemailer.createTransport({
+  service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+
+    // Email content
+    const mailOptions = {
+      from: `"${name}" <${email}>`,
+      to: process.env.GMAIL_USER, // Your inbox
+      subject: subject || "New Contact Form Message",
+      text: `
+        📩 New Contact Form Submission:
+
+        Name: ${name}
+        Email: ${email}
+        Subject: ${subject || "N/A"}
+        Message: ${message}
+      `,
+      html: `
+        <h2>📩 New Contact Form Submission</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Subject:</b> ${subject || "N/A"}</p>
+        <p><b>Message:</b><br>${message}</p>
+      `,
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Email error:", err);
+    res
+      .status(500)
+      .json({ success: false, error: "Failed to send email. Please try again." });
   }
 });
 
-const mailOptions = {
-  from: '"Odisha Tourism" <no-reply@odishatourism.example>',
-  to: 'info@odishatourism.example',
-  subject: `Contact Form: ${subject}`,
-  text: `From: ${name} <${email}>\n\n${message}`
-};
-
-transporter.sendMail(mailOptions, (err, info) => {
-  if (err) {
-    console.error('Mail error', err);
-    return res.status(500).json({ success:false, error:'Email sending failed' });
-  }
-  res.json({ success:true });
-});
-*/
-
-// test  
-
-
-
-
-
-// Run server
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// ================= START SERVER ================= //
+app.listen(PORT, () =>
+  console.log(`✅ Server running at http://localhost:${PORT}`)
+);

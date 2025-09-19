@@ -1,48 +1,82 @@
-app.post('/contact', async (req, res) => {
-  const { name, email, subject, message } = req.body;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Odisha Tourism</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/contact.js" defer></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+     <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+      Odisha Tourism
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/places">Tourist Places</a></li>
+      <li><a href="/contact" class="active">Contact</a></li>
+    </ul>
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ success: false, error: "Name, email, and message are required." });
-  }
+    <!-- Search -->
+    <form action="/search" method="POST" class="search-form" id="searchForm">
+      <input type="text" id="searchInput" name="city" placeholder="Search a place..." autocomplete="off" required>
+      <button type="submit">🔍</button>
+      <ul id="suggestions"></ul>
+    </form>
 
-  try {
-    // Create transporter (using Gmail)
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.GMAIL_USER,  // your Gmail
-        pass: process.env.GMAIL_PASS   // your App Password
-      }
-    });
+    <div class="hamburger" id="hamburger">☰</div>
+  </nav>
 
-    // Email content
-    const mailOptions = {
-      from: `"${name}" <${email}>`,
-      to: process.env.GMAIL_USER, // where you want to receive messages
-      subject: subject || "New Contact Form Message",
-      text: `
-        📩 New Contact Form Submission:
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-card">
+      <h2>Contact Us</h2>
+      <p class="muted">We’d love to hear from you! Fill out the form below.</p>
 
-        Name: ${name}
-        Email: ${email}
-        Subject: ${subject || "N/A"}
-        Message: ${message}
-      `,
-      html: `
-        <h2>📩 New Contact Form Submission</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Subject:</b> ${subject || "N/A"}</p>
-        <p><b>Message:</b><br>${message}</p>
-      `
-    };
+      <form id="contactForm" class="contact-form">
+        <div class="row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject">
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn primary">Send</button>
+          <button type="reset" class="btn ghost">Reset</button>
+        </div>
+        <div id="formFeedback" class="form-feedback"></div>
+      </form>
+    </div>
 
-    // Send email
-    await transporter.sendMail(mailOptions);
-
-    res.json({ success: true });
-  } catch (err) {
-    console.error("❌ Email error:", err);
-    res.status(500).json({ success: false, error: "Failed to send email." });
-  }
-});
+    <aside class="contact-info">
+      <div class="info-block">
+        <h3>Office</h3>
+        <p>Bhubaneswar, Odisha</p>
+      </div>
+      <div class="info-block">
+        <h3>Email</h3>
+        <p>info@odishatourism.example</p>
+      </div>
+      <div class="info-block">
+        <h3>Phone</h3>
+        <p>+91 000000 000000</p>
+      </div>
+    </aside>
+  </section>
+</body>
+</html>
