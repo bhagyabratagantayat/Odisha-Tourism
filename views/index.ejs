@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odisha Tourism</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/script.js" defer></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/images/odisha-logo.png" alt="Odisha Logo">
+      Odisha Tourism
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/places">Tourist Places</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+
+    <!-- Search form inside navbar -->
+<form action="/search" method="POST" class="search-form" id="searchForm">
+  <input type="text" id="searchInput" name="city" placeholder="Search a place..." autocomplete="off" required>
+  <button type="submit">🔍</button>
+  <ul id="suggestions"></ul>
+</form>
+
+
+    <!-- Hamburger Icon -->
+    <div class="hamburger" id="hamburger">
+      ☰
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Odisha</h1>
+    <p>Discover ancient temples, golden beaches, and natural wonders</p>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+  </section>
+</body>
+</html>

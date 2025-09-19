@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourist Places - Odisha</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/script.js" defer></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Odisha Tourism</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/places" class="active">Tourist Places</a></li>
+    </ul>
+    <form action="/search" method="POST" class="search-form">
+      <input type="text" name="city" placeholder="Search a place..." required>
+      <button type="submit">🔍</button>
+    </form>
+  </nav>
+
+  <!-- Places Section -->
+  <section class="places">
+    <h2>Famous Tourist Spots</h2>
+    <div class="cards-container">
+      
+      <!-- Card 1: Puri Jagannath Temple -->
+      <div class="card">
+        <div class="slider">
+          <img src="https://t4.ftcdn.net/jpg/04/82/09/83/240_F_482098383_n6JMrdv1bBwHYXX27qQGalGJ97xa1eK2.jpg" class="slide active">
+          <img src="https://as1.ftcdn.net/v2/jpg/04/71/22/96/1000_F_471229696_gBayPOEBrWbvhTq0vig3mvo6t6UgIhuF.jpg" class="slide">
+          <img src="https://t4.ftcdn.net/jpg/04/82/09/83/240_F_482098383_n6JMrdv1bBwHYXX27qQGalGJ97xa1eK2.jpg" class="slide">
+        </div>
+        <h3>Puri Jagannath Temple</h3>
+        <p>One of the Char Dham pilgrimage sites, Puri is famous for the Jagannath Temple and Rath Yatra.</p>
+      </div>
+
+      <!-- Card 2: Konark Sun Temple -->
+      <div class="card">
+        <div class="slider">
+          <img src="https://images.unsplash.com/photo-1706790574525-d218c4c52b5c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide active">
+          <img src="https://images.unsplash.com/photo-1706790574525-d218c4c52b5c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="slide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Konark_Sun_Temple_Front_View.jpg" class="slide">
+        </div>
+        <h3>Konark Sun Temple</h3>
+        <p>A UNESCO World Heritage Site, the 13th-century Sun Temple is known for its magnificent stone carvings.</p>
+      </div>
+
+      <!-- Card 3: Chilika Lake -->
+      <div class="card">
+        <div class="slider">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Chilika_Lake_Odisha.jpg" class="slide active">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Boating_in_Chilika_Lake.jpg" class="slide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Birds_in_Chilika_Lake.jpg" class="slide">
+        </div>
+        <h3>Chilika Lake</h3>
+        <p>Asia’s largest brackish water lagoon, famous for migratory birds and dolphin sightings.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

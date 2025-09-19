@@ -1,0 +1,332 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ff6b81;
+  padding: 15px 40px;
+  color: white;
+  position: relative;
+}
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.navbar .logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Navbar Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-links a:hover, .nav-links .active {
+  text-decoration: underline;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    right: 20px;
+    background: #ff6b81;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+/* Hero Section with Background Image */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: url("/images/jagannath-temple.jpg") center/cover no-repeat;
+  color: white;
+  position: relative;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); /* dark overlay */
+}
+.hero h1, .hero p {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Navbar */
+/* .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ff6b81;
+  padding: 15px 40px;
+  color: white;
+}
+.navbar .logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-links a:hover, .nav-links .active {
+  text-decoration: underline;
+} */
+.search-form {
+  display: flex;
+  gap: 8px;
+}
+.search-form input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+.search-form button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: white;
+  color: #ff6b81;
+  cursor: pointer;
+  font-weight: bold;
+}
+.search-form button:hover {
+  background: #f8d7da;
+} 
+
+/* Hero Section */
+/* .hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+  color: #333;
+}
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+.hero p {
+  font-size: 18px;
+} */
+
+/* Places Cards */
+.places {
+  padding: 40px;
+  text-align: center;
+}
+.places h2 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.card h3 {
+  margin: 15px 0;
+  color: #ff6b81;
+}
+.card p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Image Slider
+.slider {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.slider img.active {
+  opacity: 1;
+} */
+
+
+/* Image Slider */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* keeps images within card */
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slider img.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+
+
+
+
+/* Result Page Styling */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.container h1 {
+  color: #ff6b81;
+  margin-bottom: 20px;
+}
+
+.container img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.container p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.container a {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #ff6b81;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.container a:hover {
+  background: #ff4757;
+}
+
+/* Error message */
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+
+/* Search Form */
+.search-form {
+  display: flex;
+  gap: 8px;
+  position: relative; /* Make this parent for absolute dropdown */
+}
+
+/* Suggestions Dropdown */
+#suggestions {
+  position: absolute;
+  top: 42px;   /* aligns just below the input */
+  left: 0;
+  width: 100%; /* match input width */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Suggestion Items */
+#suggestions li {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #333;
+  transition: background 0.2s;
+}
+
+#suggestions li:hover {
+  background: #ff6b81;
+  color: white;
+}

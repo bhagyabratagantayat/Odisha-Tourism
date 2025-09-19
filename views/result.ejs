@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= data.title %> - Odisha Tourism</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Odisha Tourism</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/places">Tourist Places</a></li>
+    </ul>
+    <form action="/search" method="POST" class="search-form">
+      <input type="text" name="city" placeholder="Search a place..." required>
+      <button type="submit">🔍</button>
+    </form>
+  </nav>
+
+  <!-- Result Section -->
+  <div class="container">
+    <h1><%= data.title %></h1>
+    <% if (data.thumbnail) { %>
+      <img src="<%= data.thumbnail.source %>" alt="<%= data.title %>">
+    <% } %>
+    <p><%= data.extract %></p>
+    <a href="<%= data.content_urls.desktop.page %>" target="_blank">Read more on Wikipedia</a>
+  </div>
+</body>
+</html>
