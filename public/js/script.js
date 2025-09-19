@@ -90,3 +90,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+// contact
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const feedback = document.getElementById("formFeedback");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    feedback.textContent = "Sending...";
+    feedback.style.color = "#333";
+
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      subject: form.subject.value.trim(),
+      message: form.message.value.trim()
+    };
+
+    try {
+      const res = await fetch("/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+
+      if (res.ok && result.success) {
+        feedback.textContent = "✅ Message sent successfully!";
+        feedback.style.color = "green";
+        form.reset();
+      } else {
+        feedback.textContent = result.error || "❌ Failed to send.";
+        feedback.style.color = "crimson";
+      }
+    } catch (err) {
+      feedback.textContent = "❌ Network error.";
+      feedback.style.color = "crimson";
+    }
+  });
+});
