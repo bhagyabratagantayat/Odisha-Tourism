@@ -1,128 +1,150 @@
-/* Reset */
+/* =======================
+   RESET & BASICS
+======================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ff6b81;
-  padding: 15px 40px;
-  color: white;
-  position: relative;
+body {
+  background: #f5f5f5;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
-.navbar .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 22px;
-  font-weight: bold;
-}
-.navbar .logo img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-/* Navbar Links */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-.nav-links a {
-  color: white;
+a {
   text-decoration: none;
-  font-weight: 500;
-}
-.nav-links a:hover, .nav-links .active {
-  text-decoration: underline;
+  color: inherit;
 }
 
-/* Hamburger */
-.hamburger {
-  display: none;
-  font-size: 26px;
-  cursor: pointer;
-  color: white;
-}
-
-/* Responsive Navbar */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 65px;
-    right: 20px;
-    background: #ff6b81;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  .nav-links.active {
+/* =======================
+   NAVBAR
+======================= */
+  .navbar {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0c3b2e;
+    color: white;
+    padding: 10px 20px;
   }
-  .hamburger {
-    display: block;
-  }
-}
 
-/* Hero Section with Background Image */
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .hamburger {
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background: #0c3b2e;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+
+    .hamburger {
+      display: block;
+    }
+  }
+/* =======================
+   HERO SECTION
+======================= */
 .hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: url("https://i.ibb.co/N2FFsw3M/Whats-App-Image-2025-09-19-at-23-50-57-69349a0f.jpg") center/cover no-repeat;
+  height: 100vh;
+  width: 100%;
+  background: url("https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg") center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: white;
+  text-align: center;
   position: relative;
 }
-
-
 .hero::after {
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5); /* dark overlay */
+  inset: 0;
+  background: rgba(0,0,0,0.5);
 }
-.hero h1, .hero p {
-  position: relative;
-  z-index: 2;
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  z-index: 1;
+  animation: fadeInDown 1s ease forwards;
+  opacity: 0;
+}
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  z-index: 1;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.5s;
+}
+.hero .btn {
+  padding: 10px 25px;
+  background: #ff7f50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
+  transition: 0.3s;
+}
+.hero .btn:hover {
+  background: #ff5722;
+}
+@keyframes fadeInDown {
+  from {opacity: 0; transform: translateY(-50px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInUp {
+  from {opacity: 0; transform: translateY(50px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
-
-/* Navbar */
-/* .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ff6b81;
-  padding: 15px 40px;
-  color: white;
-}
-.navbar .logo {
-  font-size: 22px;
-  font-weight: bold;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
-.nav-links a:hover, .nav-links .active {
-  text-decoration: underline;
-} */
+/* =======================
+   SEARCH FORM & SUGGESTIONS
+======================= */
 .search-form {
   display: flex;
   gap: 8px;
+  position: relative;
 }
 .search-form input {
   padding: 8px 12px;
@@ -141,24 +163,40 @@
 }
 .search-form button:hover {
   background: #f8d7da;
-} 
+}
 
-/* Hero Section */
-/* .hero {
-  text-align: center;
-  padding: 80px 20px;
-  background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+/* Suggestions Dropdown */
+#suggestions {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  list-style: none;
+  padding: 5px 0;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+#suggestions li {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 15px;
   color: #333;
+  transition: background 0.2s;
 }
-.hero h1 {
-  font-size: 40px;
-  margin-bottom: 15px;
+#suggestions li:hover {
+  background: #ff6b81;
+  color: white;
 }
-.hero p {
-  font-size: 18px;
-} */
 
-/* Places Cards */
+/* =======================
+   PLACES CARDS
+======================= */
 .places {
   padding: 40px;
   text-align: center;
@@ -170,25 +208,44 @@
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  gap: 20px;
+  padding: 20px;
 }
 .card {
   background: #fff;
-  padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #f3f4f6, #e0f7fa);
 }
 .card h3 {
-  margin: 15px 0;
-  color: #ff6b81;
+  font-size: 20px;
+  margin: 15px;
+  color: #333;
+  transition: color 0.3s ease;
 }
 .card p {
+  font-size: 14px;
+  margin: 0 15px 20px;
   color: #555;
-  font-size: 15px;
-  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+.card:hover h3 {
+  color: #00695c;
+}
+.card:hover p {
+  color: #004d40;
 }
 
-/* Image Slider
+/* =======================
+   IMAGE SLIDER
+======================= */
 .slider {
   position: relative;
   width: 100%;
@@ -198,47 +255,25 @@
 }
 .slider img {
   width: 100%;
-  height: 100%;
+  height: 200px;
   object-fit: cover;
-  position: absolute;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-.slider img.active {
-  opacity: 1;
-} */
-
-
-/* Image Slider */
-.slider {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* keeps images within card */
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 0.5s ease;
 }
-
 .slider img.active {
   opacity: 1;
   z-index: 1;
 }
+.card:hover .slider img.active {
+  transform: scale(1.05);
+}
 
-
-
-
-
-/* Result Page Styling */
+/* =======================
+   RESULT PAGE
+======================= */
 .container {
   max-width: 800px;
   margin: 40px auto;
@@ -248,12 +283,10 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   text-align: center;
 }
-
 .container h1 {
   color: #ff6b81;
   margin-bottom: 20px;
 }
-
 .container img {
   width: 100%;
   max-height: 350px;
@@ -262,79 +295,33 @@
   margin: 20px 0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-
 .container p {
   font-size: 16px;
   line-height: 1.6;
   color: #444;
   margin-bottom: 20px;
 }
-
 .container a {
   display: inline-block;
   padding: 10px 20px;
   background: #ff6b81;
   color: white;
-  text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: 0.3s;
 }
-
 .container a:hover {
   background: #ff4757;
 }
-
-/* Error message */
 .error {
   color: red;
   font-weight: bold;
   margin-top: 15px;
 }
 
-
-/* Search Form */
-.search-form {
-  display: flex;
-  gap: 8px;
-  position: relative; /* Make this parent for absolute dropdown */
-}
-
-/* Suggestions Dropdown */
-#suggestions {
-  position: absolute;
-  top: 42px;   /* aligns just below the input */
-  left: 0;
-  width: 100%; /* match input width */
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  list-style: none;
-  padding: 5px 0;
-  margin: 0;
-  max-height: 220px;
-  overflow-y: auto;
-  z-index: 1000;
-  display: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Suggestion Items */
-#suggestions li {
-  padding: 10px 14px;
-  cursor: pointer;
-  font-size: 15px;
-  color: #333;
-  transition: background 0.2s;
-}
-
-#suggestions li:hover {
-  background: #ff6b81;
-  color: white;
-}
-
-
-/* Contact Page */
+/* =======================
+   CONTACT PAGE
+======================= */
 .contact-section {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -364,7 +351,8 @@
 .field input, .field textarea {
   width: 100%; padding: 10px 12px;
   border: 1px solid #ddd;
-  border-radius: 8px; font-size: 15px;
+  border-radius: 8px;
+  font-size: 15px;
 }
 .actions { display: flex; gap: 10px; margin-top: 10px; }
 .btn { padding: 10px 14px; border-radius: 6px; border: none; cursor: pointer; }
@@ -385,65 +373,93 @@
   .contact-form .row { grid-template-columns: 1fr; }
 }
 
-
-
-
-/* Card Styling */
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+/* =======================
+   EXTRA SECTIONS
+======================= */
+.env-banner {
+  margin: 50px auto;
   padding: 20px;
+  background: linear-gradient(90deg,#76c7c0,#a1eafb);
+  text-align: center;
+  border-radius: 10px;
+  color: #333;
+  font-weight: bold;
+  max-width: 900px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: slideIn 1s ease forwards;
 }
-
-.card {
+@keyframes slideIn {
+  from {opacity:0; transform:translateY(-50px);}
+  to {opacity:1; transform:translateY(0);}
+}
+.fun-facts {
+  display: flex; flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 50px;
+}
+.fact-card {
+  flex: 1 1 250px; max-width: 250px;
   background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.4s ease;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
   cursor: pointer;
 }
-
-/* Hover Effect */
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-  background: linear-gradient(135deg, #f3f4f6, #e0f7fa);
+.fact-card:hover { transform: scale(1.05); background: #fffae6; }
+.fact-card h3 { color: #ff7f50; margin-bottom: 10px; }
+.fact-card p { color: #555; }
+.carousel {
+  position: relative;
+  max-width: 900px;
+  margin: 50px auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.carousel img { width: 100%; display: none; }
+.carousel img.active { display: block; animation: fadeSlide 1s; }
+@keyframes fadeSlide { from {opacity: 0;} to {opacity: 1;} }
+.visitor-counter {
+  background: #ff7f50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  margin: 50px auto;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Image slider inside card */
-.slider img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-bottom: 3px solid #eee;
-  transition: transform 0.5s ease;
+/* =======================
+   FOOTER
+======================= */
+footer {
+  background: #1e1e2f;
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: auto;
 }
-
-.card:hover .slider img.active {
-  transform: scale(1.05);
-}
-
-/* Title & Text */
-.card h3 {
-  font-size: 20px;
-  margin: 15px;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.card p {
+footer p {
+  margin: 5px 0;
   font-size: 14px;
-  margin: 0 15px 20px;
-  color: #555;
-  transition: color 0.3s ease;
+  color: #bbb;
 }
-
-/* Hover text color change */
-.card:hover h3 {
-  color: #00695c;
+footer .social {
+  margin-top: 10px;
 }
-.card:hover p {
-  color: #004d40;
+footer .social a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 12px;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+footer .social a:hover {
+  color: #ffcc00;
+  transform: scale(1.1);
 }

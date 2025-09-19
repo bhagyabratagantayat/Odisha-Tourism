@@ -1,49 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Odisha Tourism</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odisha Tourism - Home</title>
   <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/script.js" defer></script>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">
-     <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
-      Odisha Tourism
-    </div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="/" class="active">Home</a></li>
-      <li><a href="/places">Tourist Places</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
 
-    <!-- Search form inside navbar -->
-<form action="/search" method="POST" class="search-form" id="searchForm">
-  <input type="text" id="searchInput" name="city" placeholder="Search a place..." autocomplete="off" required>
-  <button type="submit">🔍</button>
-  <ul id="suggestions"></ul>
-</form>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo">
+    <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+    Odisha Tourism
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/places">Tourist Places</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    &#9776; <!-- 3 bar icon -->
+  </div>
+</nav>
 
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Welcome to Odisha</h1>
+  <p>Discover temples, beaches, wildlife & culture</p>
+  <button class="btn" onclick="scrollToBanner()">Start Exploring</button>
+</section>
 
-    <!-- Hamburger Icon -->
-    <div class="hamburger" id="hamburger">
-      ☰
-    </div>
-  </nav>
+<!-- Pollution / Environment Banner -->
+<div class="env-banner" id="envBanner">
+  🌱 Keep Odisha Clean & Green – Say No to Pollution!
+</div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Welcome to Odisha</h1>
-    <p>Discover ancient temples, golden beaches, and natural wonders</p>
+<!-- Fun Facts Section -->
+<section class="fun-facts">
+  <div class="fact-card">
+    <h3>Rath Yatra</h3>
+    <p>One of the largest religious festivals in the world, held in Puri.</p>
+  </div>
+  <div class="fact-card">
+    <h3>Chilika Lake</h3>
+    <p>Asia’s largest brackish water lagoon, home to migratory birds.</p>
+  </div>
+  <div class="fact-card">
+    <h3>Konark Sun Temple</h3>
+    <p>13th-century temple, UNESCO World Heritage site.</p>
+  </div>
+</section>
 
-    <% if (error) { %>
-      <p class="error"><%= error %></p>
-    <% } %>
-  </section>
+<!-- Image Carousel -->
+<div class="carousel">
+  <img src="https://i.ibb.co/3h3h3h3/konark.jpg" class="active" alt="Konark">
+  <img src="https://i.ibb.co/3h3h3h3/puri.jpg" alt="Puri Beach">
+  <img src="https://i.ibb.co/3h3h3h3/chilika.jpg" alt="Chilika Lake">
+</div>
 
+<!-- Visitor Counter -->
+<div class="visitor-counter">
+  👀 Visitors Today: <span id="visitorCount">1234</span>
+</div>
 
+<!-- Footer -->
+<footer>
+  <p>© 2025 Odisha Tourism</p>
+  <div class="social">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">Twitter</a>
+  </div>
+</footer>
+
+<script src="/js/script.js"></script>
 </body>
 </html>

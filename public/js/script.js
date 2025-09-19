@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
+// sugges
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("searchInput");
   const suggestions = document.getElementById("suggestions");
@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=${encodeURIComponent(query)}`
       );
       const data = await res.json();
-
       const titles = data[1]; // Wikipedia titles
+
       suggestions.innerHTML = "";
 
       if (titles.length > 0) {
@@ -133,3 +133,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+
+//   js home
+
+// Hamburger Toggle
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', ()=> navLinks.classList.toggle('active'));
+
+// Image Carousel
+const carouselImages = document.querySelectorAll('.carousel img');
+let currentIndex = 0;
+setInterval(()=>{
+  carouselImages[currentIndex].classList.remove('active');
+  currentIndex = (currentIndex+1)%carouselImages.length;
+  carouselImages[currentIndex].classList.add('active');
+},4000);
+
+// Fake Visitor Counter Increment
+const visitorCount = document.getElementById('visitorCount');
+setInterval(()=> {
+  visitorCount.textContent = parseInt(visitorCount.textContent)+Math.floor(Math.random()*5);
+},3000);
+
+// Scroll to Banner
+function scrollToBanner(){
+  document.getElementById('envBanner').scrollIntoView({behavior:'smooth'});
+}
+
