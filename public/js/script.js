@@ -41,55 +41,63 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks.classList.toggle("active");
   });
 });
+const searchInput = document.getElementById("searchInput");
+const suggestions = document.getElementById("suggestions");
+const searchForm = document.getElementById("searchForm");
 
+// Function to fetch Wikipedia suggestions
+async function fetchSuggestions(query) {
+  try {
+    const response = await fetch(
+      `https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${encodeURIComponent(query)}&limit=10`
+    );
+    const data = await response.json();
+    return data[1]; // data[1] contains the titles
+  } catch (err) {
+    console.error("Wiki suggestion error:", err);
+    return [];
+  }
+}
 
-// sugges
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("searchInput");
-  const suggestions = document.getElementById("suggestions");
+// Display suggestions
+searchInput.addEventListener("input", async () => {
+  const query = searchInput.value.trim();
+  if (!query) {
+    suggestions.style.display = "none";
+    suggestions.innerHTML = "";
+    return;
+  }
 
-  searchInput.addEventListener("input", async () => {
-    const query = searchInput.value.trim();
-    if (!query) {
-      suggestions.style.display = "none";
-      return;
-    }
+  const results = await fetchSuggestions(query);
 
-    try {
-      const res = await fetch(
-        `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=${encodeURIComponent(query)}`
-      );
-      const data = await res.json();
-      const titles = data[1]; // Wikipedia titles
-
-      suggestions.innerHTML = "";
-
-      if (titles.length > 0) {
-        titles.forEach(title => {
-          const li = document.createElement("li");
-          li.textContent = title;
-          li.addEventListener("click", () => {
-            searchInput.value = title;
-            suggestions.style.display = "none";
-          });
-          suggestions.appendChild(li);
-        });
-        suggestions.style.display = "block";
-      } else {
-        suggestions.style.display = "none";
-      }
-    } catch (err) {
-      console.error("Error fetching suggestions:", err);
-    }
-  });
-
-  // Hide suggestions when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest("#searchForm")) {
-      suggestions.style.display = "none";
-    }
-  });
+  if (results.length === 0) {
+    suggestions.innerHTML = `<li>No matching place found</li>`;
+  } else {
+    suggestions.innerHTML = results
+      .map((item) => `<li>${item}</li>`)
+      .join("");
+  }
+  suggestions.style.display = "block";
 });
+
+// Handle click on suggestion
+suggestions.addEventListener("click", (e) => {
+  if (e.target.tagName === "LI") {
+    const selected = e.target.textContent;
+    if (selected === "No matching place found") return;
+    searchInput.value = selected;
+    suggestions.style.display = "none";
+    searchForm.submit(); // submit form to server
+  }
+});
+
+// Hide suggestions when clicking outside
+document.addEventListener("click", (e) => {
+  if (!searchForm.contains(e.target)) {
+    suggestions.style.display = "none";
+  }
+});
+
 
 
 // contact
