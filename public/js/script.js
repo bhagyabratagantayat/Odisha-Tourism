@@ -99,6 +99,16 @@ document.addEventListener("click", (e) => {
 });
 
 
+  // Hero slider script
+  const slides = document.querySelectorAll('.hero-slider .slide');
+  let currentSlide = 0;
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 4000); // change slide every 4 seconds
+
+
 
 // contact
 document.addEventListener("DOMContentLoaded", () => {
@@ -141,6 +151,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+
+// contact
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const popup = document.getElementById("popup");
+  const popupMessage = document.getElementById("popupMessage");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // stop reload
+
+    const formData = {
+      name: form.name.value,
+      email: form.email.value,
+      subject: form.subject.value,
+      message: form.message.value
+    };
+
+    try {
+      const res = await fetch("/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        popupMessage.textContent = "✅ Your message has been sent successfully!";
+        form.reset();
+      } else {
+        popupMessage.textContent = "❌ Failed to send message. Try again.";
+      }
+    } catch (err) {
+      popupMessage.textContent = "⚠️ Error: " + err.message;
+    }
+
+    popup.classList.remove("hidden");
+  });
+});
+
+function closePopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
 
 
 

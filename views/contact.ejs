@@ -6,12 +6,13 @@
   <title>Contact - Odisha Tourism</title>
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/contact.js" defer></script>
+  <link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
 </head>
 <body>
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
-     <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+      <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
       Odisha Tourism
     </div>
     <ul class="nav-links" id="navLinks">
@@ -19,14 +20,6 @@
       <li><a href="/places">Tourist Places</a></li>
       <li><a href="/contact" class="active">Contact</a></li>
     </ul>
-
-    <!-- Search -->
-    <form action="/search" method="POST" class="search-form" id="searchForm">
-      <input type="text" id="searchInput" name="city" placeholder="Search a place..." autocomplete="off" required>
-      <button type="submit">🔍</button>
-      <ul id="suggestions"></ul>
-    </form>
-
     <div class="hamburger" id="hamburger">☰</div>
   </nav>
 
@@ -36,7 +29,8 @@
       <h2>Contact Us</h2>
       <p class="muted">We’d love to hear from you! Fill out the form below.</p>
 
-      <form id="contactForm" class="contact-form">
+      <!-- IMPORTANT: added action="/contact" method="POST" -->
+      <form id="contactForm" class="contact-form" action="/contact" method="POST">
         <div class="row">
           <div class="field">
             <label for="name">Name</label>
@@ -70,11 +64,11 @@
       </div>
       <div class="info-block">
         <h3>Email</h3>
-        <p>info@odishatourism.example</p>
+        <p>bhagyabratagantayat@gmail.com</p>
       </div>
       <div class="info-block">
         <h3>Phone</h3>
-        <p>+91 000000 000000</p>
+        <p>+91 78550 91725</p>
       </div>
     </aside>
   </section>

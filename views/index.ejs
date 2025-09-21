@@ -4,7 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Odisha Tourism - Home</title>
-  <link rel="stylesheet" href="/css/style.css">
+<link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+  body { line-height:1.6; overflow-x:hidden; background:#f5f5f5; }
+  a { text-decoration:none; color:inherit; }
+
+  /* Navbar */
+  .navbar { display:flex; justify-content:space-between; align-items:center; background:#0c3b2e; color:white; padding:10px 20px; position:fixed; width:100%; z-index:1000; }
+  .navbar .logo { display:flex; align-items:center; font-size:18px; font-weight:bold; }
+  .navbar .logo img { height:40px; margin-right:10px; }
+  .nav-links { list-style:none; display:flex; gap:20px; }
+  .nav-links li a { color:white; font-weight:500; }
+  .hamburger { display:none; font-size:24px; cursor:pointer; }
+  @media (max-width:768px){ 
+    .nav-links { display:none; flex-direction:column; background:#0c3b2e; position:absolute; top:60px; right:20px; padding:10px; border-radius:8px; } 
+    .nav-links.show{ display:flex; } 
+    .hamburger{ display:block; } 
+  }
+
+  /* Hero Slider */
+  .hero-slider { position:relative; width:100%; height:90vh; overflow:hidden; }
+  .hero-slider .slide { position:absolute; width:100%; height:100%; background-size:cover; background-position:center; opacity:0; transition: opacity 1s ease-in-out; display:flex; justify-content:center; align-items:center; }
+  .hero-slider .slide.active { opacity:1; z-index:1; }
+  .hero-slider .overlay { position:absolute; inset:0; background:rgba(0,0,0,0.4); }
+  .hero-text { position:relative; text-align:center; color:white; max-width:90%; }
+  .hero-text h1 { font-size:3rem; margin-bottom:15px; animation:fadeInDown 1s forwards; }
+  .hero-text p { font-size:1.3rem; margin-bottom:20px; animation:fadeInUp 1s forwards; }
+  .hero-text .btn { padding:12px 30px; border:none; border-radius:6px; background:#ff7f50; color:white; cursor:pointer; transition:0.3s; }
+  .hero-text .btn:hover { background:#ff5722; }
+  @keyframes fadeInDown { from{opacity:0; transform:translateY(-50px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes fadeInUp { from{opacity:0; transform:translateY(50px);} to{opacity:1; transform:translateY(0);} }
+
+  /* Tourist Places */
+  .places-section { padding:50px 20px; max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
+  .place-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.1); cursor:pointer; transition:0.3s; }
+  .place-card:hover { transform:scale(1.03); }
+  .place-card img { width:100%; height:200px; object-fit:cover; transition: transform 0.3s; }
+  .place-card:hover img { transform: scale(1.1); }
+  .place-card .card-content { padding:15px; }
+  .place-card h3 { color:#0c3b2e; margin-bottom:8px; }
+  .place-card p { color:#555; font-size:0.95rem; }
+
+  /* Fun Facts */
+  .fun-facts { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:50px 20px; }
+  .fact-card { flex:1 1 250px; max-width:250px; background:#fff; padding:20px; border-radius:10px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer; }
+  .fact-card:hover { transform:scale(1.05); background:#fffae6; }
+  .fact-card h3 { color:#ff7f50; margin-bottom:10px; }
+  .fact-card p { color:#555; }
+
+  /* Visitor Counter */
+  .visitor-counter { background:#ff7f50; color:white; padding:20px; text-align:center; font-size:1.2rem; border-radius:10px; margin:40px auto; max-width:400px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+
+  /* Footer */
+  footer { background:#1e1e2f; color:#fff; text-align:center; padding:20px 10px; margin-top:40px; }
+  footer p { font-size:14px; color:#bbb; margin-bottom:10px; }
+  footer .social a { color:#fff; margin:0 12px; font-size:16px; transition:0.3s; }
+  footer .social a:hover { color:#ffcc00; transform:scale(1.1); }
+
+</style>
 </head>
 <body>
 
@@ -19,45 +77,27 @@
     <li><a href="/places">Tourist Places</a></li>
     <li><a href="/contact">Contact</a></li>
   </ul>
-  <div class="hamburger" id="hamburger">
-    &#9776; <!-- 3 bar icon -->
-  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
 </nav>
 
-<!-- Hero Section -->
-<section class="hero">
-  <h1>Welcome to Odisha</h1>
-  <p>Discover temples, beaches, wildlife & culture</p>
-  <button class="btn" onclick="scrollToBanner()">Start Exploring</button>
-</section>
+<!-- Hero Slider -->
+<section class="hero-slider" id="heroSlider"></section>
 
-<!-- Pollution / Environment Banner -->
-<div class="env-banner" id="envBanner">
-  🌱 Keep Odisha Clean & Green – Say No to Pollution!
+<!-- Tourist Places Section -->
+<section class="places-section" id="placesSection"></section>
+
+<!-- Add this inside your <body>, after tourist places section -->
+<div id="wikiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000;">
+  <div style="background:#fff; padding:20px; max-width:600px; width:90%; border-radius:10px; position:relative;">
+    <span id="closeModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">&times;</span>
+    <h2 id="wikiTitle"></h2>
+    <p id="wikiExtract"></p>
+    <a id="wikiLink" href="#" target="_blank">Read more on Wikipedia</a>
+  </div>
 </div>
 
 <!-- Fun Facts Section -->
-<section class="fun-facts">
-  <div class="fact-card">
-    <h3>Rath Yatra</h3>
-    <p>One of the largest religious festivals in the world, held in Puri.</p>
-  </div>
-  <div class="fact-card">
-    <h3>Chilika Lake</h3>
-    <p>Asia’s largest brackish water lagoon, home to migratory birds.</p>
-  </div>
-  <div class="fact-card">
-    <h3>Konark Sun Temple</h3>
-    <p>13th-century temple, UNESCO World Heritage site.</p>
-  </div>
-</section>
-
-<!-- Image Carousel -->
-<div class="carousel">
-  <img src="https://i.ibb.co/3h3h3h3/konark.jpg" class="active" alt="Konark">
-  <img src="https://i.ibb.co/3h3h3h3/puri.jpg" alt="Puri Beach">
-  <img src="https://i.ibb.co/3h3h3h3/chilika.jpg" alt="Chilika Lake">
-</div>
+<section class="fun-facts" id="funFacts"></section>
 
 <!-- Visitor Counter -->
 <div class="visitor-counter">
@@ -74,6 +114,144 @@
   </div>
 </footer>
 
-<script src="/js/script.js"></script>
+<script>
+  const touristPlaces = [
+    {
+      "name": "Puri Jagannath Temple",
+      "description": "One of the Char Dham pilgrimage sites, Puri is famous for the Jagannath Temple and Rath Yatra.",
+      "images": [
+        "https://iili.io/K7tTNu1.md.jpg",
+        "https://iili.io/K7tTOwF.md.jpg",
+        "https://iili.io/K7tTjyP.md.jpg"
+      ]
+    },
+    {
+      "name": "Konark Sun Temple",
+      "description": "A UNESCO World Heritage Site, the 13th-century Sun Temple is known for its magnificent stone carvings.",
+      "images": [
+        "https://iili.io/K7taINp.jpg",
+        "https://iili.io/K7taTDN.jpg",
+        "https://iili.io/K7tazRR.jpg"
+      ]
+    },
+    {
+      "name": "Chilika Lake",
+      "description": "Asia’s largest brackish water lagoon, famous for migratory birds and dolphin sightings.",
+      "images": [
+        "https://iili.io/K7pRfuR.jpg",
+        "https://iili.io/K7pR9G1.jpg",
+        "https://iili.io/K7pRBZN.jpg"
+      ]
+    }
+    // You can include more places here if needed
+  ];
+
+  // ===== Dynamic Hero Slider =====
+  const heroSlider = document.getElementById('heroSlider');
+  touristPlaces.slice(0,5).forEach(place => {
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
+    slide.style.backgroundImage = `url('${place.images[0]}')`;
+    slide.innerHTML = `
+      <div class="overlay"></div>
+      <div class="hero-text">
+        <h1>${place.name}</h1>
+        <p>${place.description}</p>
+        <button class="btn" onclick="scrollToPlaces()">Explore</button>
+      </div>
+    `;
+    heroSlider.appendChild(slide);
+  });
+  heroSlider.querySelector('.slide').classList.add('active');
+
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slider .slide');
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide+1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 5000);
+
+  function scrollToPlaces() {
+    document.getElementById('placesSection').scrollIntoView({behavior:'smooth'});
+  }
+
+  // ===== Tourist Places Cards =====
+  const placesSection = document.getElementById('placesSection');
+  touristPlaces.forEach(place => {
+    const card = document.createElement('div');
+    card.classList.add('place-card');
+    card.innerHTML = `
+      <img src="${place.images[0]}" alt="${place.name}" loading="lazy">
+      <div class="card-content">
+        <h3>${place.name}</h3>
+        <p>${place.description}</p>
+      </div>
+    `;
+    placesSection.appendChild(card);
+  });
+
+  // ===== Fun Facts Section =====
+  const funFacts = document.getElementById('funFacts');
+  ['Rath Yatra','Chilika Lake','Konark Sun Temple'].forEach(title => {
+    const factCard = document.createElement('div');
+    factCard.classList.add('fact-card');
+    factCard.innerHTML = `
+      <h3>${title}</h3>
+      <p>${touristPlaces.find(p => p.name.includes(title))?.description || 'Explore Odisha'}</p>
+    `;
+    funFacts.appendChild(factCard);
+  });
+
+  // Hamburger toggle
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('show');
+  });
+
+
+   // Function to fetch Wikipedia data
+  async function fetchWikipedia(placeName) {
+    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(placeName)}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
+  async function explorePlace(placeName) {
+    const data = await fetchWikipedia(placeName);
+    if(data) {
+      document.getElementById('wikiTitle').innerText = data.title || placeName;
+      document.getElementById('wikiExtract').innerText = data.extract || "No information available.";
+      document.getElementById('wikiLink').href = data.content_urls?.desktop.page || "#";
+      document.getElementById('wikiModal').style.display = 'flex';
+    }
+  }
+
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('wikiModal').style.display = 'none';
+  });
+
+  // ===== Update Hero Slider Explore Buttons =====
+  document.querySelectorAll('.hero-text .btn').forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      const placeName = touristPlaces[index]?.name || 'Odisha';
+      explorePlace(placeName);
+    });
+  });
+
+  // ===== Update Tourist Places Cards to explore on click =====
+  document.querySelectorAll('.place-card').forEach((card, idx) => {
+    card.addEventListener('click', () => {
+      const placeName = touristPlaces[idx].name;
+      explorePlace(placeName);
+    });
+  });
+</script>
+
 </body>
 </html>

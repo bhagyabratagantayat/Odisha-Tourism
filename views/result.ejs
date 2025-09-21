@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= data.title %> - Odisha Tourism</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
 </head>
 <body>
   <!-- Navbar -->
@@ -14,6 +14,7 @@
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/places">Tourist Places</a></li>
+      <li><a href="/contact">Contact</a></li>
     </ul>
     <form action="/search" method="POST" class="search-form">
       <input type="text" name="city" placeholder="Search a place..." required>
@@ -22,13 +23,20 @@
   </nav>
 
   <!-- Result Section -->
-  <div class="container">
+  <main class="container">
     <h1><%= data.title %></h1>
+
     <% if (data.thumbnail) { %>
-      <img src="<%= data.thumbnail.source %>" alt="<%= data.title %>">
+      <img src="<%= data.thumbnail.source %>" 
+           alt="<%= data.title %>" 
+           class="result-img">
     <% } %>
-    <p><%= data.extract %></p>
-    <a href="<%= data.content_urls.desktop.page %>" target="_blank">Read more on Wikipedia</a>
-  </div>
+
+    <p class="result-desc"><%= data.extract %></p>
+
+    <a href="<%= data.content_urls.desktop.page %>" target="_blank" class="read-more">
+      📖 Read more on Wikipedia
+    </a>
+  </main>
 </body>
 </html>
