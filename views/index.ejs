@@ -1,167 +1,555 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odisha Tourism - Home</title>
-<link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-  body { line-height:1.6; overflow-x:hidden; background:#f5f5f5; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odisha Tourism - Home</title>
+  <link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
+  <!-- Make sure to include Font Awesome in your <head> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-  a { text-decoration:none; color:inherit; }
+    body {
+      line-height: 1.6;
+      overflow-x: hidden;
+      background: #f5f5f5;
+    }
 
-  /* Navbar */
-  .navbar { display:flex; justify-content:space-between; align-items:center; background:#0c3b2e; color:white; padding:10px 20px; position:fixed; width:100%; z-index:1000; }
-  .navbar .logo { display:flex; align-items:center; font-size:18px; font-weight:bold; }
-  .navbar .logo img { height:40px; margin-right:10px; }
-  .nav-links { list-style:none; display:flex; gap:20px; }
-  .nav-links li a { color:white; font-weight:500; }
-  .hamburger { display:none; font-size:24px; cursor:pointer; }
-  @media (max-width:768px){ 
-    .nav-links { display:none; flex-direction:column; background:#0c3b2e; position:absolute; top:60px; right:20px; padding:10px; border-radius:8px; } 
-    .nav-links.show{ display:flex; } 
-    .hamburger{ display:block; } 
-  }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-  /* Hero Slider */
-  .hero-slider { position:relative; width:100%; height:90vh; overflow:hidden; }
-  .hero-slider .slide { position:absolute; width:100%; height:100%; background-size:cover; background-position:center; opacity:0; transition: opacity 1s ease-in-out; display:flex; justify-content:center; align-items:center; }
-  .hero-slider .slide.active { opacity:1; z-index:1; }
-  .hero-slider .overlay { position:absolute; inset:0; background:rgba(0,0,0,0.4); }
-  .hero-text { position:relative; text-align:center; color:white; max-width:90%; }
-  .hero-text h1 { font-size:3rem; margin-bottom:15px; animation:fadeInDown 1s forwards; }
-  .hero-text p { font-size:1.3rem; margin-bottom:20px; animation:fadeInUp 1s forwards; }
-  .hero-text .btn { padding:12px 30px; border:none; border-radius:6px; background:#ff7f50; color:white; cursor:pointer; transition:0.3s; }
-  .hero-text .btn:hover { background:#ff5722; }
-  .slider-nav { position:absolute; width:100%; display:flex; justify-content:space-between; top:50%; transform:translateY(-50%); padding:0 20px; z-index:2; }
-  .slider-nav span { font-size:2rem; cursor:pointer; color:white; background:rgba(0,0,0,0.3); padding:5px 10px; border-radius:50%; }
-  .dots { position:absolute; bottom:20px; width:100%; display:flex; justify-content:center; gap:10px; z-index:2; }
-  .dots span { width:12px; height:12px; background:#fff; border-radius:50%; cursor:pointer; opacity:0.5; }
-  .dots span.active { opacity:1; }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0c3b2e;
+      color: white;
+      padding: 10px 20px;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
 
-  @keyframes fadeInDown { from{opacity:0; transform:translateY(-50px);} to{opacity:1; transform:translateY(0);} }
-  @keyframes fadeInUp { from{opacity:0; transform:translateY(50px);} to{opacity:1; transform:translateY(0);} }
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-  @media (max-width:768px){
-    .hero-text h1 { font-size:2rem; }
-    .hero-text p { font-size:1rem; }
-  }
+    .navbar .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
 
-  /* Tourist Places */
-  .places-section { padding:50px 20px; max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
-  .place-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.1); cursor:pointer; transition:0.3s; position:relative; }
-  .place-card:hover { transform:scale(1.03); }
-  .place-card img { width:100%; height:200px; object-fit:cover; transition: transform 0.3s; }
-  .place-card:hover img { transform: scale(1.1); }
-  .place-card .card-content { padding:15px; }
-  .place-card h3 { color:#0c3b2e; margin-bottom:8px; }
-  .place-card p { color:#555; font-size:0.95rem; }
-  .place-badge { position:absolute; top:10px; left:10px; background:#ff7f50; color:white; padding:5px 10px; border-radius:6px; font-size:0.8rem; font-weight:bold; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
 
-  /* Fun Facts */
-  .fun-facts { display:flex; overflow-x:auto; gap:20px; padding:50px 20px; scroll-snap-type: x mandatory; }
-  .fact-card { flex:0 0 250px; background:#fff; padding:20px; border-radius:10px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer; scroll-snap-align:start; }
-  .fact-card:hover { transform:scale(1.05); background:#fffae6; }
-  .fact-card h3 { color:#ff7f50; margin-bottom:10px; }
-  .fact-card p { color:#555; }
+    .nav-links li a {
+      color: white;
+      font-weight: 500;
+    }
 
-  /* Visitor Counter */
-  .visitor-counter { background:#ff7f50; color:white; padding:20px; text-align:center; font-size:1.2rem; border-radius:10px; margin:40px auto; max-width:400px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
 
-  /* Footer */
-  footer { background:#1e1e2f; color:#fff; text-align:center; padding:20px 10px; margin-top:40px; }
-  footer p { font-size:14px; color:#bbb; margin-bottom:10px; }
-  footer .social a { color:#fff; margin:0 12px; font-size:16px; transition:0.3s; }
-  footer .social a:hover { color:#ffcc00; transform:scale(1.1); }
+    @media (max-width:768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0c3b2e;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 10px;
+        border-radius: 8px;
+      }
 
-  /* Spin Wheel */
-  #spinContainer { margin:50px auto; max-width:400px; text-align:center; }
-  #wheel { width:300px; height:300px; border-radius:50%; border:10px solid #0c3b2e; margin:0 auto; position:relative; }
-  #spinBtn { margin-top:15px; padding:10px 20px; border:none; background:#ff7f50; color:white; cursor:pointer; border-radius:6px; }
-  #spinBtn:hover { background:#ff5722; }
+      .nav-links.show {
+        display: flex;
+      }
 
-  /* Modals */
-  .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000; }
-  .modal-content { background:#fff; padding:20px; max-width:600px; width:90%; border-radius:10px; position:relative; }
-  .close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px; }
+      .hamburger {
+        display: block;
+      }
+    }
 
-  
+    /* Hero Slider */
+    .hero-slider {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      overflow: hidden;
+    }
 
-/* Spin Result Modal */
-#spinResultModal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  z-index: 3000;
-  animation: fadeIn 0.5s ease-in-out;
+    .hero-slider .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-slider .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .hero-slider .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-text {
+      position: relative;
+      text-align: center;
+      color: white;
+      max-width: 90%;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      animation: fadeInDown 1s forwards;
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s forwards;
+    }
+
+    .hero-text .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      background: #ff7f50;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hero-text .btn:hover {
+      background: #ff5722;
+    }
+
+    .slider-nav {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 20px;
+      z-index: 2;
+    }
+
+    .slider-nav span {
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 5px 10px;
+      border-radius: 50%;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .dots span {
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    .dots span.active {
+      opacity: 1;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width:768px) {
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .hero-text p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Tourist Places */
+    .places-section {
+      padding: 50px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .place-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .place-card:hover {
+      transform: scale(1.03);
+    }
+
+    .place-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .place-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .place-card .card-content {
+      padding: 15px;
+    }
+
+    .place-card h3 {
+      color: #0c3b2e;
+      margin-bottom: 8px;
+    }
+
+    .place-card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .place-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff7f50;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    /* Fun Facts */
+    .fun-facts {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 50px 20px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .fact-card {
+      flex: 0 0 250px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      cursor: pointer;
+      scroll-snap-align: start;
+    }
+
+    .fact-card:hover {
+      transform: scale(1.05);
+      background: #fffae6;
+    }
+
+    .fact-card h3 {
+      color: #ff7f50;
+      margin-bottom: 10px;
+    }
+
+    .fact-card p {
+      color: #555;
+    }
+
+    /* Visitor Counter */
+    .visitor-counter {
+      background: #ff7f50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      margin: 40px auto;
+      max-width: 400px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: #1e1e2f;
+      color: #fff;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      font-size: 14px;
+      color: #bbb;
+      margin-bottom: 10px;
+    }
+
+    footer .social a {
+      color: #fff;
+      margin: 0 12px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    footer .social a:hover {
+      color: #ffcc00;
+      transform: scale(1.1);
+    }
+
+    /* Spin Wheel */
+    #spinContainer {
+      margin: 50px auto;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    #wheel {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 10px solid #0c3b2e;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    #spinBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      background: #ff7f50;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    #spinBtn:hover {
+      background: #ff5722;
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      max-width: 600px;
+      width: 90%;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+
+
+    /* Spin Result Modal */
+    #spinResultModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    #spinResultModal .modal-content {
+      background: #fff;
+      padding: 25px;
+      max-width: 700px;
+      width: 90%;
+      border-radius: 15px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.5s ease-in-out;
+    }
+
+    #spinResultModal .modal-content h2 {
+      color: #0c3b2e;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    #spinResultModal .modal-content p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    #spinResultModal .modal-content img {
+      width: 90%;
+      max-width: 500px;
+      margin: 10px 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #spinResultModal .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #ff7f50;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    #spinResultModal .close:hover {
+      color: #ff5722;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Dark Mode */
+body.dark-mode {
+  background: #121212;
+  color: #f5f5f5;
 }
 
-#spinResultModal .modal-content {
-  background: #fff;
-  padding: 25px;
-  max-width: 700px;
-  width: 90%;
-  border-radius: 15px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  animation: slideUp 0.5s ease-in-out;
+body.dark-mode .navbar {
+  background: #1e1e1e;
 }
 
-#spinResultModal .modal-content h2 {
-  color: #0c3b2e;
-  font-size: 2rem;
-  margin-bottom: 15px;
+body.dark-mode .place-card {
+  background: #1e1e1e;
+  color: #f5f5f5;
 }
 
-#spinResultModal .modal-content p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 20px;
+body.dark-mode .fun-facts .fact-card {
+  background: #2a2a2a;
+  color: #fff;
 }
 
-#spinResultModal .modal-content img {
-  width: 90%;
-  max-width: 500px;
-  margin: 10px 0;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+body.dark-mode footer {
+  background: #0c0c0c;
+  color: #ccc;
 }
 
-#spinResultModal .close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #ff7f50;
-  font-weight: bold;
-  transition: 0.3s;
+body.dark-mode input {
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #555;
 }
 
-#spinResultModal .close:hover {
-  color: #ff5722;
+body.dark-mode .hero-text .btn {
+  background: #ff5722;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; } 
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(50px); opacity: 0; } 
-  to { transform: translateY(0); opacity: 1; }
-}
-
-</style>
+  </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
+ <!-- Navbar -->
 <nav class="navbar">
   <div class="logo">
     <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
@@ -172,299 +560,316 @@
     <li><a href="/places">Tourist Places</a></li>
     <li><a href="/contact">Contact</a></li>
   </ul>
-  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div style="display:flex; align-items:center; gap:15px;">
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <button id="darkModeToggle" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
 </nav>
 
-<!-- Hero Slider -->
-<section class="hero-slider" id="heroSlider">
-  <div class="slider-nav">
-    <span id="prev">&#10094;</span>
-    <span id="next">&#10095;</span>
+  <!-- Hero Slider -->
+  <section class="hero-slider" id="heroSlider">
+    <div class="slider-nav">
+      <span id="prev">&#10094;</span>
+      <span id="next">&#10095;</span>
+    </div>
+    <div class="dots"></div>
+  </section>
+
+  <!-- Spin the Wheel -->
+  <div id="spinContainer">
+    <h2>Spin the Wheel to Explore Odisha</h2>
+    <div id="wheel"></div>
+    <button id="spinBtn">SPIN</button>
   </div>
-  <div class="dots"></div>
-</section>
-
-<!-- Spin the Wheel -->
-<div id="spinContainer">
-  <h2>Spin the Wheel to Explore Odisha</h2>
-  <div id="wheel"></div>
-  <button id="spinBtn">SPIN</button>
-</div>
 
 
 
-<!-- Search Bar -->
-<div style="text-align:center; margin:30px 0;">
-  <input type="text" id="searchInput" placeholder="Search Tourist Places..." style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;">
-</div>
-
-<!-- Tourist Places Section -->
-<section class="places-section" id="placesSection"></section>
-
-<!-- Place Modal -->
-<div id="placeModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closePlaceModal">&times;</span>
-    <h2 id="modalTitle"></h2>
-    <p id="modalDesc"></p>
-    <div id="modalImages"></div>
+  <!-- Search Bar -->
+  <div style="text-align:center; margin:30px 0;">
+    <input type="text" id="searchInput" placeholder="Search Tourist Places..."
+      style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;">
   </div>
-</div>
 
-<!-- Fun Facts Section -->
-<section class="fun-facts" id="funFacts"></section>
+  <!-- Tourist Places Section -->
+  <section class="places-section" id="placesSection"></section>
 
-<!-- Visitor Counter -->
-<div class="visitor-counter">
-  👀 Visitors Today: <span id="visitorCount">1234</span>
-</div>
+  <!-- Place Modal -->
+  <div id="placeModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closePlaceModal">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <div id="modalImages"></div>
+    </div>
+  </div>
 
-<!-- Footer -->
+  <!-- Fun Facts Section -->
+  <section class="fun-facts" id="funFacts"></section>
+
+  <!-- Visitor Counter -->
+  <div class="visitor-counter">
+    👀 Visitors Today: <span id="visitorCount">1234</span>
+  </div>
+
+  <!-- Footer -->
 <footer>
   <p>© 2025 Odisha Tourism</p>
   <div class="social">
-    <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
-    <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
-    <a href="https://www.youtube.com/@pilubhaiofficial" target="_blank" rel="noopener noreferrer">YouTube</a>
+    <a href="#" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-facebook-f"></i> Facebook
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-twitter"></i> Twitter
+    </a>
+    <a href="https://github.com/bhagyabratagantayat" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://www.youtube.com/@pilubhaiofficial" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-youtube"></i> YouTube
+    </a>
   </div>
 </footer>
 
-<script>
-const touristPlaces = [
-  {
-    name: "Puri Jagannath Temple",
-    description: "One of the Char Dham pilgrimage sites, Puri is famous for the Jagannath Temple and Rath Yatra.",
-    images: [
-      "https://iili.io/K7tTNu1.md.jpg",
-      "https://iili.io/K7tTOwF.md.jpg",
-      "https://iili.io/K7tTjyP.md.jpg"
-    ],
-    badge: "Must Visit"
-  },
-  {
-    name: "Konark Sun Temple",
-    description: "A UNESCO World Heritage Site, the 13th-century Sun Temple is known for its magnificent stone carvings.",
-    images: [
-      "https://iili.io/K7taINp.jpg",
-      "https://iili.io/K7taTDN.jpg",
-      "https://iili.io/K7tazRR.jpg"
-    ],
-    badge: "UNESCO Site"
-  },
-  {
-    name: "Chilika Lake",
-    description: "Asia’s largest brackish water lagoon, famous for migratory birds and dolphin sightings.",
-    images: [
-      "https://iili.io/K7pRfuR.jpg",
-      "https://iili.io/K7pR9G1.jpg",
-      "https://iili.io/K7pRBZN.jpg"
-    ],
-    badge: "Nature"
-  },
-  {
-    name: "Lingaraj Temple",
-    description: "One of the oldest temples in Bhubaneswar, dedicated to Lord Shiva, showcasing Kalinga architecture.",
-    images: [
-      "https://iili.io/K7p05gI.jpg",
-      "https://iili.io/K7p0lbs.jpg",
-      "https://iili.io/K7p0IWv.jpg"
-    ]
-  },
-  {
-    name: "Udayagiri & Khandagiri Caves",
-    description: "Ancient Jain rock-cut caves near Bhubaneswar, rich in carvings and history.",
-    images: [
-      "https://iili.io/K7pEfAF.jpg",
-      "https://iili.io/K7pEnoJ.jpg",
-      "https://iili.io/K7pEoMv.jpg"
-    ]
-  },
-  {
-    name: "Similipal National Park",
-    description: "A biosphere reserve famous for tigers, elephants, and beautiful waterfalls.",
-    images: [
-      "https://iili.io/K7pGAqx.jpg",
-      "https://iili.io/K7pGTsj.jpg",
-      "https://iili.io/K7pG5gV.jpg"
-    ]
-  },
-  {
-    name: "Nandankanan Zoological Park",
-    description: "Located in Bhubaneswar, famous for white tigers and botanical garden.",
-    images: [
-      "https://iili.io/K7pVxPj.jpg",
-      "https://iili.io/K7pVoMb.jpg",
-      "https://iili.io/K7pVIKx.jpg"
-    ]
-  },
-  {
-    name: "Hirakud Dam",
-    description: "One of the longest dams in the world, built on the Mahanadi River near Sambalpur.",
-    images: [
-      "https://iili.io/K7pXRZF.jpg",
-      "https://iili.io/K7pX7Cg.jpg",
-      "https://iili.io/K7pXuTP.jpg"
-    ]
-  },
-  {
-    name: "Satkosia Gorge",
-    description: "A scenic wildlife sanctuary with river Mahanadi cutting through mountains.",
-    images: [
-      "https://iili.io/K7pjUBe.jpg",
-      "https://iili.io/K7pjrrb.jpg",
-      "https://iili.io/K7pjgEu.jpg"
-    ]
-  },
-  {
-    name: "Raghurajpur Heritage Village",
-    description: "Known as the heritage crafts village, famous for Pattachitra paintings and handicrafts.",
-    images: [
-      "https://iili.io/K7pN2cb.jpg",
-      "https://iili.io/K7pNdKu.jpg",
-      "https://iili.io/K7pN9V9.jpg"
-    ]
-  },
-  {
-    name: "Chandrabhaga Beach",
-    description: "A serene beach near Konark, famous for sunrise views and cultural festivals.",
-    images: [
-      "https://iili.io/K7pePP1.jpg",
-      "https://iili.io/K7pesKF.jpg",
-      "https://iili.io/K7pe4oB.jpg"
-    ]
-  },
-  {
-    name: "Gopalpur Beach",
-    description: "Peaceful beach town on the Bay of Bengal, ideal for relaxation and seafood.",
-    images: [
-      "https://iili.io/K7pSdKP.jpg",
-      "https://iili.io/K7pSfRa.jpg",
-      "https://iili.io/K7pSKHg.jpg"
-    ]
-  },
-  {
-    name: "Bhitarkanika National Park",
-    description: "Famous for saltwater crocodiles, mangrove forests, and rich biodiversity.",
-    images: [
-      "https://iili.io/K7prEfp.jpg",
-      "https://iili.io/K7prlWv.jpg",
-      "https://iili.io/K7pr0sR.jpg"
-    ]
-  },
-  {
-    name: "Taratarini Temple",
-    description: "Sacred shrine of Goddess Tara Tarini, located on Kumari hills near Berhampur.",
-    images: [
-      "https://iili.io/KYd5NoJ.jpg",
-      "https://iili.io/KYd5jta.jpg",
-      "https://iili.io/KYd5OMv.jpg"
-    ]
-  },
-  {
-    name: "Khandadhar Waterfall",
-    description: "One of the highest waterfalls in Odisha, surrounded by dense forests.",
-    images: [
-      "https://iili.io/KYdE7CF.jpg",
-      "https://iili.io/KYdERQ1.jpg",
-      "https://iili.io/KYdEAhP.jpg"
-    ]
-  },
-  {
-    name: "Duduma Waterfall",
-    description: "Located in Koraput, this majestic waterfall is also a hydroelectric power source.",
-    images: [
-      "https://iili.io/KYdWuSa.jpg",
-      "https://iili.io/KYdWIKF.jpg",
-      "https://iili.io/KYdWTcg.jpg"
-    ]
-  },
-  {
-    name: "Harishankar Temple & Gandhamardan Hills",
-    description: "A religious and natural spot, known for scenic hills, caves, and medicinal plants.",
-    images: [
-      "https://iili.io/KYdSWtn.md.jpg",
-      "https://iili.io/KYdQ7ef.jpg",
-      "https://iili.io/KYdQYb4.jpg"
-    ]
-  },
-  {
-    name: "Gupteswar Cave Temple",
-    description: "Famous Shiva temple inside a limestone cave in Koraput district.",
-    images: [
-      "https://iili.io/KY29GHP.jpg",
-      "https://iili.io/KY29MR1.jpg",
-      "https://iili.io/KY29VOF.jpg"
-    ]
-  },
-  {
-    name: "Kapilash Temple",
-    description: "Situated on a hill in Dhenkanal, dedicated to Lord Shiva with panoramic views.",
-    images: [
-      "https://iili.io/KY2dPsa.jpg",
-      "https://iili.io/KY2d6Wg.jpg",
-      "https://iili.io/KY2d4zF.jpg"
-    ]
-  },
-  {
-    name: "Samaleswari Temple",
-    description: "Famous temple in Sambalpur, dedicated to Goddess Samaleswari, the presiding deity of the region.",
-    images: [
-      "https://iili.io/KY23Ann.jpg",
-      "https://iili.io/KY23TZX.jpg",
-      "https://iili.io/KY23zuI.jpg"
-    ]
-  },
-  {
-    name: "Chandipur Beach",
-    description: "Unique beach where the sea recedes up to 5 km during low tide.",
-    images: [
-      "https://iili.io/KY2fFn9.jpg",
-      "https://iili.io/KY2fKGe.jpg",
-      "https://iili.io/KY2f2Z7.jpg"
-    ]
-  },
-  {
-    name: "Tikarpada Wildlife Sanctuary",
-    description: "Known for gharial crocodile conservation and scenic Satkosia gorge views.",
-    images: [
-      "https://iili.io/KY2zmmb.jpg",
-      "https://iili.io/KY2I2EB.jpg",
-      "https://iili.io/KY2IBpa.jpg"
-    ]
-  },
-  {
-    name: "Mahendragiri Hill",
-    description: "Part of the Eastern Ghats in Odisha, known for its scenic views, mythological significance, and trekking opportunities.",
-    images: [
-      "https://iili.io/KYTgPS4.md.jpg",
-      "https://iili.io/KYTgLR2.md.jpg",
-      "https://iili.io/KYTg6lf.md.jpg",
-      "https://iili.io/KYTgsHl.md.jpg"
-    ]
-  },
-  {
-    name: "Deomali Hill",
-    description: "The highest peak in Odisha, located in the Eastern Ghats, famous for trekking, lush greenery, and panoramic valley views.",
-    images: [
-      "https://iili.io/KYGsGwl.md.jpg",
-      "https://iili.io/KYGsWnS.md.jpg",
-      "https://iili.io/KYGsEu4.md.jpg",
-      "https://iili.io/KYGsMt2.md.jpg",
-      "https://iili.io/KYGsXM7.md.jpg"
-    ]
-  }
-];
+  <script>
+    const touristPlaces = [
+      {
+        name: "Puri Jagannath Temple",
+        description: "One of the Char Dham pilgrimage sites, Puri is famous for the Jagannath Temple and Rath Yatra.",
+        images: [
+          "https://iili.io/K7tTNu1.md.jpg",
+          "https://iili.io/K7tTOwF.md.jpg",
+          "https://iili.io/K7tTjyP.md.jpg"
+        ],
+        badge: "Must Visit"
+      },
+      {
+        name: "Konark Sun Temple",
+        description: "A UNESCO World Heritage Site, the 13th-century Sun Temple is known for its magnificent stone carvings.",
+        images: [
+          "https://iili.io/K7taINp.jpg",
+          "https://iili.io/K7taTDN.jpg",
+          "https://iili.io/K7tazRR.jpg"
+        ],
+        badge: "UNESCO Site"
+      },
+      {
+        name: "Chilika Lake",
+        description: "Asia’s largest brackish water lagoon, famous for migratory birds and dolphin sightings.",
+        images: [
+          "https://iili.io/K7pRfuR.jpg",
+          "https://iili.io/K7pR9G1.jpg",
+          "https://iili.io/K7pRBZN.jpg"
+        ],
+        badge: "Nature"
+      },
+      {
+        name: "Lingaraj Temple",
+        description: "One of the oldest temples in Bhubaneswar, dedicated to Lord Shiva, showcasing Kalinga architecture.",
+        images: [
+          "https://iili.io/K7p05gI.jpg",
+          "https://iili.io/K7p0lbs.jpg",
+          "https://iili.io/K7p0IWv.jpg"
+        ]
+      },
+      {
+        name: "Udayagiri & Khandagiri Caves",
+        description: "Ancient Jain rock-cut caves near Bhubaneswar, rich in carvings and history.",
+        images: [
+          "https://iili.io/K7pEfAF.jpg",
+          "https://iili.io/K7pEnoJ.jpg",
+          "https://iili.io/K7pEoMv.jpg"
+        ]
+      },
+      {
+        name: "Similipal National Park",
+        description: "A biosphere reserve famous for tigers, elephants, and beautiful waterfalls.",
+        images: [
+          "https://iili.io/K7pGAqx.jpg",
+          "https://iili.io/K7pGTsj.jpg",
+          "https://iili.io/K7pG5gV.jpg"
+        ]
+      },
+      {
+        name: "Nandankanan Zoological Park",
+        description: "Located in Bhubaneswar, famous for white tigers and botanical garden.",
+        images: [
+          "https://iili.io/K7pVxPj.jpg",
+          "https://iili.io/K7pVoMb.jpg",
+          "https://iili.io/K7pVIKx.jpg"
+        ]
+      },
+      {
+        name: "Hirakud Dam",
+        description: "One of the longest dams in the world, built on the Mahanadi River near Sambalpur.",
+        images: [
+          "https://iili.io/K7pXRZF.jpg",
+          "https://iili.io/K7pX7Cg.jpg",
+          "https://iili.io/K7pXuTP.jpg"
+        ]
+      },
+      {
+        name: "Satkosia Gorge",
+        description: "A scenic wildlife sanctuary with river Mahanadi cutting through mountains.",
+        images: [
+          "https://iili.io/K7pjUBe.jpg",
+          "https://iili.io/K7pjrrb.jpg",
+          "https://iili.io/K7pjgEu.jpg"
+        ]
+      },
+      {
+        name: "Raghurajpur Heritage Village",
+        description: "Known as the heritage crafts village, famous for Pattachitra paintings and handicrafts.",
+        images: [
+          "https://iili.io/K7pN2cb.jpg",
+          "https://iili.io/K7pNdKu.jpg",
+          "https://iili.io/K7pN9V9.jpg"
+        ]
+      },
+      {
+        name: "Chandrabhaga Beach",
+        description: "A serene beach near Konark, famous for sunrise views and cultural festivals.",
+        images: [
+          "https://iili.io/K7pePP1.jpg",
+          "https://iili.io/K7pesKF.jpg",
+          "https://iili.io/K7pe4oB.jpg"
+        ]
+      },
+      {
+        name: "Gopalpur Beach",
+        description: "Peaceful beach town on the Bay of Bengal, ideal for relaxation and seafood.",
+        images: [
+          "https://iili.io/K7pSdKP.jpg",
+          "https://iili.io/K7pSfRa.jpg",
+          "https://iili.io/K7pSKHg.jpg"
+        ]
+      },
+      {
+        name: "Bhitarkanika National Park",
+        description: "Famous for saltwater crocodiles, mangrove forests, and rich biodiversity.",
+        images: [
+          "https://iili.io/K7prEfp.jpg",
+          "https://iili.io/K7prlWv.jpg",
+          "https://iili.io/K7pr0sR.jpg"
+        ]
+      },
+      {
+        name: "Taratarini Temple",
+        description: "Sacred shrine of Goddess Tara Tarini, located on Kumari hills near Berhampur.",
+        images: [
+          "https://iili.io/KYd5NoJ.jpg",
+          "https://iili.io/KYd5jta.jpg",
+          "https://iili.io/KYd5OMv.jpg"
+        ]
+      },
+      {
+        name: "Khandadhar Waterfall",
+        description: "One of the highest waterfalls in Odisha, surrounded by dense forests.",
+        images: [
+          "https://iili.io/KYdE7CF.jpg",
+          "https://iili.io/KYdERQ1.jpg",
+          "https://iili.io/KYdEAhP.jpg"
+        ]
+      },
+      {
+        name: "Duduma Waterfall",
+        description: "Located in Koraput, this majestic waterfall is also a hydroelectric power source.",
+        images: [
+          "https://iili.io/KYdWuSa.jpg",
+          "https://iili.io/KYdWIKF.jpg",
+          "https://iili.io/KYdWTcg.jpg"
+        ]
+      },
+      {
+        name: "Harishankar Temple & Gandhamardan Hills",
+        description: "A religious and natural spot, known for scenic hills, caves, and medicinal plants.",
+        images: [
+          "https://iili.io/KYdSWtn.md.jpg",
+          "https://iili.io/KYdQ7ef.jpg",
+          "https://iili.io/KYdQYb4.jpg"
+        ]
+      },
+      {
+        name: "Gupteswar Cave Temple",
+        description: "Famous Shiva temple inside a limestone cave in Koraput district.",
+        images: [
+          "https://iili.io/KY29GHP.jpg",
+          "https://iili.io/KY29MR1.jpg",
+          "https://iili.io/KY29VOF.jpg"
+        ]
+      },
+      {
+        name: "Kapilash Temple",
+        description: "Situated on a hill in Dhenkanal, dedicated to Lord Shiva with panoramic views.",
+        images: [
+          "https://iili.io/KY2dPsa.jpg",
+          "https://iili.io/KY2d6Wg.jpg",
+          "https://iili.io/KY2d4zF.jpg"
+        ]
+      },
+      {
+        name: "Samaleswari Temple",
+        description: "Famous temple in Sambalpur, dedicated to Goddess Samaleswari, the presiding deity of the region.",
+        images: [
+          "https://iili.io/KY23Ann.jpg",
+          "https://iili.io/KY23TZX.jpg",
+          "https://iili.io/KY23zuI.jpg"
+        ]
+      },
+      {
+        name: "Chandipur Beach",
+        description: "Unique beach where the sea recedes up to 5 km during low tide.",
+        images: [
+          "https://iili.io/KY2fFn9.jpg",
+          "https://iili.io/KY2fKGe.jpg",
+          "https://iili.io/KY2f2Z7.jpg"
+        ]
+      },
+      {
+        name: "Tikarpada Wildlife Sanctuary",
+        description: "Known for gharial crocodile conservation and scenic Satkosia gorge views.",
+        images: [
+          "https://iili.io/KY2zmmb.jpg",
+          "https://iili.io/KY2I2EB.jpg",
+          "https://iili.io/KY2IBpa.jpg"
+        ]
+      },
+      {
+        name: "Mahendragiri Hill",
+        description: "Part of the Eastern Ghats in Odisha, known for its scenic views, mythological significance, and trekking opportunities.",
+        images: [
+          "https://iili.io/KYTgPS4.md.jpg",
+          "https://iili.io/KYTgLR2.md.jpg",
+          "https://iili.io/KYTg6lf.md.jpg",
+          "https://iili.io/KYTgsHl.md.jpg"
+        ]
+      },
+      {
+        name: "Deomali Hill",
+        description: "The highest peak in Odisha, located in the Eastern Ghats, famous for trekking, lush greenery, and panoramic valley views.",
+        images: [
+          "https://iili.io/KYGsGwl.md.jpg",
+          "https://iili.io/KYGsWnS.md.jpg",
+          "https://iili.io/KYGsEu4.md.jpg",
+          "https://iili.io/KYGsMt2.md.jpg",
+          "https://iili.io/KYGsXM7.md.jpg"
+        ]
+      }
+    ];
 
 
-// ===== Hero Slider =====
-const heroSlider = document.getElementById('heroSlider');
-touristPlaces.slice(0,5).forEach((place,i) => {
-  const slide = document.createElement('div');
-  slide.classList.add('slide');
-  slide.style.backgroundImage = `url('${place.images[0]}')`;
-  slide.setAttribute('aria-label', place.name);
-  slide.innerHTML = `
+    // ===== Hero Slider =====
+    const heroSlider = document.getElementById('heroSlider');
+    touristPlaces.slice(0, 5).forEach((place, i) => {
+      const slide = document.createElement('div');
+      slide.classList.add('slide');
+      slide.style.backgroundImage = `url('${place.images[0]}')`;
+      slide.setAttribute('aria-label', place.name);
+      slide.innerHTML = `
     <div class="overlay"></div>
     <div class="hero-text">
       <h1>${place.name}</h1>
@@ -472,43 +877,43 @@ touristPlaces.slice(0,5).forEach((place,i) => {
       <button class="btn" onclick="scrollToPlaces()">Explore</button>
     </div>
   `;
-  heroSlider.appendChild(slide);
+      heroSlider.appendChild(slide);
 
-  const dot = document.createElement('span');
-  dot.addEventListener('click', () => { goToSlide(i); });
-  document.querySelector('.dots').appendChild(dot);
-});
-heroSlider.querySelector('.slide').classList.add('active');
-document.querySelector('.dots span').classList.add('active');
+      const dot = document.createElement('span');
+      dot.addEventListener('click', () => { goToSlide(i); });
+      document.querySelector('.dots').appendChild(dot);
+    });
+    heroSlider.querySelector('.slide').classList.add('active');
+    document.querySelector('.dots span').classList.add('active');
 
-let currentSlide = 0;
-const slides = document.querySelectorAll('.hero-slider .slide');
-const dots = document.querySelectorAll('.dots span');
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    const dots = document.querySelectorAll('.dots span');
 
-function goToSlide(index){
-  slides[currentSlide].classList.remove('active');
-  dots[currentSlide].classList.remove('active');
-  currentSlide = index;
-  slides[currentSlide].classList.add('active');
-  dots[currentSlide].classList.add('active');
-}
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
 
-document.getElementById('prev').addEventListener('click', () => {
-  goToSlide((currentSlide-1+slides.length)%slides.length);
-});
-document.getElementById('next').addEventListener('click', () => {
-  goToSlide((currentSlide+1)%slides.length);
-});
+    document.getElementById('prev').addEventListener('click', () => {
+      goToSlide((currentSlide - 1 + slides.length) % slides.length);
+    });
+    document.getElementById('next').addEventListener('click', () => {
+      goToSlide((currentSlide + 1) % slides.length);
+    });
 
-setInterval(() => { goToSlide((currentSlide+1)%slides.length); }, 5000);
-function scrollToPlaces() { document.getElementById('placesSection').scrollIntoView({behavior:'smooth'}); }
+    setInterval(() => { goToSlide((currentSlide + 1) % slides.length); }, 5000);
+    function scrollToPlaces() { document.getElementById('placesSection').scrollIntoView({ behavior: 'smooth' }); }
 
-// ===== Tourist Places Cards =====
-const placesSection = document.getElementById('placesSection');
-touristPlaces.forEach(place => {
-  const card = document.createElement('div');
-  card.classList.add('place-card');
-  card.innerHTML = `
+    // ===== Tourist Places Cards =====
+    const placesSection = document.getElementById('placesSection');
+    touristPlaces.forEach(place => {
+      const card = document.createElement('div');
+      card.classList.add('place-card');
+      card.innerHTML = `
     ${place.badge ? `<div class="place-badge">${place.badge}</div>` : ''}
     <img src="${place.images[0]}" alt="${place.name}" loading="lazy">
     <div class="card-content">
@@ -516,169 +921,188 @@ touristPlaces.forEach(place => {
       <p>${place.description}</p>
     </div>
   `;
-  card.addEventListener('click', () => openPlaceModal(place));
-  placesSection.appendChild(card);
-});
+      card.addEventListener('click', () => openPlaceModal(place));
+      placesSection.appendChild(card);
+    });
 
-// ===== Place Modal =====
-const placeModal = document.getElementById('placeModal');
-const closePlaceModal = document.getElementById('closePlaceModal');
-function openPlaceModal(place){
-  document.getElementById('modalTitle').innerText = place.name;
-  document.getElementById('modalDesc').innerText = place.description;
-  const modalImages = document.getElementById('modalImages');
-  modalImages.innerHTML = '';
-  place.images.forEach(img => {
-    const image = document.createElement('img');
-    image.src = img;
-    image.alt = place.name;
-    image.loading = 'lazy';
-    image.style.width='100%';
-    image.style.margin='10px 0';
-    modalImages.appendChild(image);
-  });
-  placeModal.style.display='flex';
-}
-closePlaceModal.addEventListener('click',()=>{ placeModal.style.display='none'; });
-placeModal.addEventListener('click', (e)=>{ if(e.target===placeModal) placeModal.style.display='none'; });
-
-// ===== Fun Facts Section =====
-const funFacts = document.getElementById('funFacts');
-touristPlaces.forEach(place => {
-  const factCard = document.createElement('div');
-  factCard.classList.add('fact-card');
-  factCard.innerHTML = `<h3>${place.name}</h3><p>${place.description}</p>`;
-  funFacts.appendChild(factCard);
-});
-
-// Auto-scroll fun facts
-let scrollAmount = 0;
-setInterval(() => {
-  scrollAmount += 1;
-  if(scrollAmount > funFacts.scrollWidth - funFacts.clientWidth) scrollAmount = 0;
-  funFacts.scrollTo({left: scrollAmount, behavior:'smooth'});
-}, 50);
-
-// ===== Visitor Counter Animation =====
-let visitorCount = 1234;
-const visitorEl = document.getElementById('visitorCount');
-setInterval(() => { visitorCount++; visitorEl.innerText = visitorCount; }, 3000);
-
-// ===== Hamburger toggle =====
-document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('show'); });
-
-// ===== Spin the Wheel =====
-// ===== Spin the Wheel with Images =====
-const wheel = document.getElementById('wheel');
-const spinBtn = document.getElementById('spinBtn');
-
-// Create wheel sectors
-const wheelCanvas = document.createElement('canvas');
-wheelCanvas.width = 300;
-wheelCanvas.height = 300;
-wheel.appendChild(wheelCanvas);
-const ctx = wheelCanvas.getContext('2d');
-const radius = wheelCanvas.width / 2;
-
-function drawWheel() {
-  const numPlaces = touristPlaces.length;
-  const arc = (2 * Math.PI) / numPlaces;
-  for (let i = 0; i < numPlaces; i++) {
-    const startAngle = i * arc;
-    const endAngle = startAngle + arc;
-    ctx.beginPath();
-    ctx.moveTo(radius, radius);
-    ctx.arc(radius, radius, radius, startAngle, endAngle);
-    ctx.fillStyle = i % 2 === 0 ? '#ffcc80' : '#ffe0b2';
-    ctx.fill();
-    ctx.strokeStyle = '#0c3b2e';
-    ctx.stroke();
-
-    // Draw image
-    const img = new Image();
-    img.src = touristPlaces[i].images[0];
-    img.onload = () => {
-      ctx.save();
-      ctx.translate(radius, radius);
-      const angle = startAngle + arc / 2;
-      ctx.rotate(angle);
-      ctx.drawImage(img, radius * 0.5, -radius * 0.1, 50, 50);
-      ctx.restore();
+    // ===== Place Modal =====
+    const placeModal = document.getElementById('placeModal');
+    const closePlaceModal = document.getElementById('closePlaceModal');
+    function openPlaceModal(place) {
+      document.getElementById('modalTitle').innerText = place.name;
+      document.getElementById('modalDesc').innerText = place.description;
+      const modalImages = document.getElementById('modalImages');
+      modalImages.innerHTML = '';
+      place.images.forEach(img => {
+        const image = document.createElement('img');
+        image.src = img;
+        image.alt = place.name;
+        image.loading = 'lazy';
+        image.style.width = '100%';
+        image.style.margin = '10px 0';
+        modalImages.appendChild(image);
+      });
+      placeModal.style.display = 'flex';
     }
-  }
-}
+    closePlaceModal.addEventListener('click', () => { placeModal.style.display = 'none'; });
+    placeModal.addEventListener('click', (e) => { if (e.target === placeModal) placeModal.style.display = 'none'; });
 
-drawWheel();
+    // ===== Fun Facts Section =====
+    const funFacts = document.getElementById('funFacts');
+    touristPlaces.forEach(place => {
+      const factCard = document.createElement('div');
+      factCard.classList.add('fact-card');
+      factCard.innerHTML = `<h3>${place.name}</h3><p>${place.description}</p>`;
+      funFacts.appendChild(factCard);
+    });
 
-let deg = 0;
-spinBtn.addEventListener('click', () => {
-  let rand = 5000 + Math.random() * 5000;
-  deg += rand;
-  wheelCanvas.style.transition = 'transform 5s ease-out';
-  wheelCanvas.style.transform = `rotate(${deg}deg)`;
-  setTimeout(() => {
-  const normalizedDeg = deg % 360;
-  const sectorAngle = 360 / touristPlaces.length;
-  const selectedIndex = touristPlaces.length - 1 - Math.floor(normalizedDeg / sectorAngle);
-  window.location.href = `/spinresult/${selectedIndex}`;
-}, 5000);
+    // Auto-scroll fun facts
+    let scrollAmount = 0;
+    setInterval(() => {
+      scrollAmount += 1;
+      if (scrollAmount > funFacts.scrollWidth - funFacts.clientWidth) scrollAmount = 0;
+      funFacts.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    }, 50);
 
-});
+    // ===== Visitor Counter Animation =====
+    let visitorCount = 1234;
+    const visitorEl = document.getElementById('visitorCount');
+    setInterval(() => { visitorCount++; visitorEl.innerText = visitorCount; }, 3000);
 
+    // ===== Hamburger toggle =====
+    document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('show'); });
 
-// ===== Search Functionality =====
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  Array.from(placesSection.children).forEach(card => {
-    const name = card.querySelector('h3').innerText.toLowerCase();
-    card.style.display = name.includes(query)?'block':'none';
-  });
-});
+    // ===== Spin the Wheel =====
+    // ===== Spin the Wheel with Images =====
+    const wheel = document.getElementById('wheel');
+    const spinBtn = document.getElementById('spinBtn');
 
+    // Create wheel sectors
+    const wheelCanvas = document.createElement('canvas');
+    wheelCanvas.width = 300;
+    wheelCanvas.height = 300;
+    wheel.appendChild(wheelCanvas);
+    const ctx = wheelCanvas.getContext('2d');
+    const radius = wheelCanvas.width / 2;
 
-// After spin completes
-let spinning = false;
+    function drawWheel() {
+      const numPlaces = touristPlaces.length;
+      const arc = (2 * Math.PI) / numPlaces;
+      for (let i = 0; i < numPlaces; i++) {
+        const startAngle = i * arc;
+        const endAngle = startAngle + arc;
+        ctx.beginPath();
+        ctx.moveTo(radius, radius);
+        ctx.arc(radius, radius, radius, startAngle, endAngle);
+        ctx.fillStyle = i % 2 === 0 ? '#ffcc80' : '#ffe0b2';
+        ctx.fill();
+        ctx.strokeStyle = '#0c3b2e';
+        ctx.stroke();
 
-spinBtn.addEventListener('click', () => {
-  if (spinning) return;
-  spinning = true;
+        // Draw image
+        const img = new Image();
+        img.src = touristPlaces[i].images[0];
+        img.onload = () => {
+          ctx.save();
+          ctx.translate(radius, radius);
+          const angle = startAngle + arc / 2;
+          ctx.rotate(angle);
+          ctx.drawImage(img, radius * 0.5, -radius * 0.1, 50, 50);
+          ctx.restore();
+        }
+      }
+    }
 
-  const numPlaces = touristPlaces.length;
-  const spinAngle = Math.floor(2000 + Math.random() * 2000); // random spin
-  let currentRotation = 0;
-  const spinDuration = 4000;
-  const start = performance.now();
-
-  function animate(time) {
-    const progress = Math.min((time - start) / spinDuration, 1);
-    currentRotation = spinAngle * progress;
-    ctx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
-    ctx.save();
-    ctx.translate(radius, radius);
-    ctx.rotate((currentRotation * Math.PI) / 180);
-    ctx.translate(-radius, -radius);
     drawWheel();
-    ctx.restore();
 
-    if (progress < 1) {
+    let deg = 0;
+    spinBtn.addEventListener('click', () => {
+      let rand = 5000 + Math.random() * 5000;
+      deg += rand;
+      wheelCanvas.style.transition = 'transform 5s ease-out';
+      wheelCanvas.style.transform = `rotate(${deg}deg)`;
+      setTimeout(() => {
+        const normalizedDeg = deg % 360;
+        const sectorAngle = 360 / touristPlaces.length;
+        const selectedIndex = touristPlaces.length - 1 - Math.floor(normalizedDeg / sectorAngle);
+        window.location.href = `/spinresult/${selectedIndex}`;
+      }, 5000);
+
+    });
+
+
+    // ===== Search Functionality =====
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      Array.from(placesSection.children).forEach(card => {
+        const name = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = name.includes(query) ? 'block' : 'none';
+      });
+    });
+
+
+    // After spin completes
+    let spinning = false;
+
+    spinBtn.addEventListener('click', () => {
+      if (spinning) return;
+      spinning = true;
+
+      const numPlaces = touristPlaces.length;
+      const spinAngle = Math.floor(2000 + Math.random() * 2000); // random spin
+      let currentRotation = 0;
+      const spinDuration = 4000;
+      const start = performance.now();
+
+      function animate(time) {
+        const progress = Math.min((time - start) / spinDuration, 1);
+        currentRotation = spinAngle * progress;
+        ctx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
+        ctx.save();
+        ctx.translate(radius, radius);
+        ctx.rotate((currentRotation * Math.PI) / 180);
+        ctx.translate(-radius, -radius);
+        drawWheel();
+        ctx.restore();
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          spinning = false;
+
+          // ✅ Determine selected place
+          const degrees = currentRotation % 360;
+          const index = Math.floor(numPlaces - (degrees / (360 / numPlaces))) % numPlaces;
+
+          // ✅ Redirect to server route
+          window.location.href = `/spinresult/${index}`;
+        }
+      }
       requestAnimationFrame(animate);
-    } else {
-      spinning = false;
+    });
 
-      // ✅ Determine selected place
-      const degrees = currentRotation % 360;
-      const index = Math.floor(numPlaces - (degrees / (360 / numPlaces))) % numPlaces;
 
-      // ✅ Redirect to server route
-      window.location.href = `/spinresult/${index}`;
-    }
+
+    const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+const toggleIcon = darkModeToggle.querySelector('i');
+
+darkModeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark-mode');
+  
+  // Switch icon
+  if(body.classList.contains('dark-mode')){
+    toggleIcon.classList.remove('fa-moon');
+    toggleIcon.classList.add('fa-sun');
+  } else {
+    toggleIcon.classList.remove('fa-sun');
+    toggleIcon.classList.add('fa-moon');
   }
-  requestAnimationFrame(animate);
 });
 
-
-</script>
+  </script>
 
 </body>
+
 </html>

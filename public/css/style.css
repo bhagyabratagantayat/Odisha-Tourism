@@ -1149,3 +1149,25 @@ a {
   .result-img { max-width: 100%; border-radius: 15px; }
   .read-more { font-size: 0.85rem; padding: 6px 12px; }
 }
+
+
+
+/* dark mood  */
+
+/* ===== Dark Mode ===== */
+body.dark {
+  background: #111;
+  color: #fff;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Navbar & Elements */
+body.dark .navbar { background: #0b2a1f; }
+body.dark .nav-links li a { color: #fff; }
+body.dark .place-card { background: #222; color: #fff; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
+body.dark .hero-text h1, body.dark .hero-text p { color: #fff; }
+body.dark .fact-card { background: #222; color: #fff; }
+body.dark .visitor-counter { background: #444; color: #fff; }
+body.dark footer { background: #111; color: #bbb; }
+
+/* ===== Dark Mode Toggle Button ===== */

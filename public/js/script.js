@@ -157,3 +157,4 @@ if (visitorCount) {
 function scrollToBanner() {
   document.getElementById("envBanner").scrollIntoView({ behavior: "smooth" });
 }
+
