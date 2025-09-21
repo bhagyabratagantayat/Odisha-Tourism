@@ -108,9 +108,11 @@
 <footer>
   <p>© 2025 Odisha Tourism</p>
   <div class="social">
-    <a href="#">Instagram</a>
-    <a href="#">Facebook</a>
-    <a href="#">Twitter</a>
+    <a href="#" target="_blank">Instagram</a>
+    <a href="#" target="_blank">Facebook</a>
+    <a href="#" target="_blank">Twitter</a>
+   <a href="https://www.youtube.com/@pilubhaiofficial" target="_blank">YouTube</a>
+
   </div>
 </footer>
 
@@ -209,48 +211,7 @@
   });
 
 
-   // Function to fetch Wikipedia data
-  async function fetchWikipedia(placeName) {
-    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(placeName)}`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-  }
-
-  async function explorePlace(placeName) {
-    const data = await fetchWikipedia(placeName);
-    if(data) {
-      document.getElementById('wikiTitle').innerText = data.title || placeName;
-      document.getElementById('wikiExtract').innerText = data.extract || "No information available.";
-      document.getElementById('wikiLink').href = data.content_urls?.desktop.page || "#";
-      document.getElementById('wikiModal').style.display = 'flex';
-    }
-  }
-
-  document.getElementById('closeModal').addEventListener('click', () => {
-    document.getElementById('wikiModal').style.display = 'none';
-  });
-
-  // ===== Update Hero Slider Explore Buttons =====
-  document.querySelectorAll('.hero-text .btn').forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      const placeName = touristPlaces[index]?.name || 'Odisha';
-      explorePlace(placeName);
-    });
-  });
-
-  // ===== Update Tourist Places Cards to explore on click =====
-  document.querySelectorAll('.place-card').forEach((card, idx) => {
-    card.addEventListener('click', () => {
-      const placeName = touristPlaces[idx].name;
-      explorePlace(placeName);
-    });
-  });
+  
 </script>
 
 </body>

@@ -110,6 +110,11 @@ app.post('/contact', async (req, res) => {
 
 //feedback 
 
+app.get('/contact', (req, res) => {
+  res.render('contact', { error: null });
+});
+
+
 
 // Start
 app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));
