@@ -808,3 +808,86 @@ footer {
   font-size: 14px;
   color: #bbb;
 }
+
+
+
+
+
+/* govt logo  */
+
+/* ===== Navbar Styles ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #043927;
+  padding: 10px 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  gap: 10px;
+}
+
+.navbar .logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.navbar .nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.navbar .nav-links li a:hover,
+.navbar .nav-links li a.active {
+  color: #1dbf73;
+  transform: scale(1.05);
+}
+
+/* Hamburger menu for smaller screens */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #043927;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .navbar .nav-links.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

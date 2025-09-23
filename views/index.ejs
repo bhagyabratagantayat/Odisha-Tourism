@@ -8,6 +8,8 @@
   <link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
   <!-- Make sure to include Font Awesome in your <head> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+
   <style>
    * {
   margin: 0;
@@ -344,7 +346,6 @@ a {
 }
 
 /* ===== Footer Styles ===== */
-/* ===== Footer Styles ===== */
 footer {
   background: #043927;
   color: #fff;
@@ -379,6 +380,7 @@ footer {
 }
 
 .footer-links h4,
+.footer-team h4,
 .footer-social h4 {
   margin-bottom: 10px;
   font-size: 18px;
@@ -388,13 +390,16 @@ footer {
   padding-bottom: 4px;
 }
 
-.footer-links ul {
+.footer-links ul,
+.footer-team ul {
   list-style: none;
   padding: 0;
 }
 
-.footer-links li {
+.footer-links li,
+.footer-team li {
   margin: 8px 0;
+  font-size: 14px;
 }
 
 .footer-links a {
@@ -522,11 +527,10 @@ body.dark-mode .hero-text .btn {
 
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="logo">
-    <a href="/" style="display:flex; align-items:center; text-decoration:none; color:white;">
-      <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
-     &nbsp; Odisha Tourism
-    </a>
+  <a href="/" class="logo">
+    <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+    Odisha Tourism
+  </a>
   </div>
 
   <ul class="nav-links" id="navLinks">
@@ -596,6 +600,7 @@ body.dark-mode .hero-text .btn {
   </div>
 
  
+
 <!-- Footer -->
 <footer>
   <div class="footer-container">
@@ -617,6 +622,37 @@ body.dark-mode .hero-text .btn {
       </ul>
     </div>
 
+    <!-- Team Credits
+    <div class="footer-team">
+      <h4>Our Team</h4>
+      <ul>
+        <li><strong>Bhagyabrata Gantayat</strong> – Team Lead & Developer</li>
+        <li>jitendra Nial – Research & Content</li>
+        <li>Suraj Adhikary – Frontend Support</li>
+        <li>Sudeep Sarkar – Design & Ideas</li>
+        <li>Ranjan Kumar – Testing & Feedback</li>
+      </ul>
+    </div> -->
+
+     <!-- Team Credits -->
+   <div class="footer-team">
+  <h4>Our Team</h4>
+  <ul style="list-style:none; padding:0; margin:0;">
+    <li>
+      <span style="font-weight:700; color:#ff9800; font-size:17px; text-shadow:1px 1px 3px rgba(0,0,0,0.3);">
+        🌟 Bhagyabrata Gantayat
+      </span> – Team Lead & Main Developer
+    </li>
+    <li><strong>Jitendra Nial</strong> – Coding & Research</li>
+    <li><strong>Ayush Singh</strong> – Design & Frontend Support</li>
+    <li><strong>Jamana Rahul</strong> – Design, Improvement Ideas & Suggestions</li>
+  </ul>
+</div>
+
+
+
+
+
     <!-- Social Media -->
     <div class="footer-social">
       <h4>Follow Us</h4>
@@ -633,9 +669,11 @@ body.dark-mode .hero-text .btn {
 
   <!-- Bottom -->
   <div class="footer-bottom">
-    <p>© 2025 Odisha Tourism | Designed & Developed by Bhagyabrata Gantayat</p>
+    <p>© 2025 Odisha Tourism | Designed & Developed by Bhagyabrata Gantayat & Team</p>
   </div>
 </footer>
+
+
   <script>
     const touristPlaces = [
       {
