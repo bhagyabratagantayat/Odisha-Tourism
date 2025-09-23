@@ -158,3 +158,53 @@ function scrollToBanner() {
   document.getElementById("envBanner").scrollIntoView({ behavior: "smooth" });
 }
 
+// booking 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const bookingForm = document.getElementById("bookingForm");
+  const bookingFeedback = document.getElementById("bookingFeedback");
+
+  if (!bookingForm) return;
+
+  bookingForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    bookingFeedback.textContent = "⏳ Submitting your booking...";
+    bookingFeedback.style.color = "blue";
+
+    const formData = Object.fromEntries(new FormData(bookingForm).entries());
+
+    try {
+      const res = await fetch("/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        bookingFeedback.textContent = "✅ Booking submitted successfully!";
+        bookingFeedback.style.color = "green";
+        bookingForm.reset();
+
+        // Small animation for feedback
+        bookingFeedback.animate(
+          [
+            { transform: "scale(0.8)", opacity: 0.5 },
+            { transform: "scale(1.1)", opacity: 1 },
+            { transform: "scale(1)", opacity: 1 },
+          ],
+          { duration: 500, easing: "ease-out" }
+        );
+      } else {
+        bookingFeedback.textContent = `❌ ${result.error || "Failed to submit booking."}`;
+        bookingFeedback.style.color = "red";
+      }
+    } catch (err) {
+      console.error("Booking form error:", err);
+      bookingFeedback.textContent = "❌ Server error. Please try again later.";
+      bookingFeedback.style.color = "red";
+    }
+  });
+});

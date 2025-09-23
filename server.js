@@ -333,6 +333,59 @@ app.post('/contact', async (req, res) => {
   }
 });
 
+// booking trip
+
+// Booking Form Submission (POST)
+app.post('/booking', async (req, res) => {
+  const { fullname, phone, destination, travelDate, people, notes } = req.body || {};
+
+  if (!fullname || !phone || !destination || !travelDate || !people) {
+    return res.status(400).json({ success: false, error: 'All required fields must be filled.' });
+  }
+
+  // Build mail options
+  const mailOptions = {
+    from: `"Booking Form" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_USER, // your inbox
+    subject: `New Booking Request from ${fullname}`,
+    text: `New Booking Request:\n
+    Full Name: ${fullname}
+    Phone: ${phone}
+    Destination: ${destination}
+    Travel Date: ${travelDate}
+    People: ${people}
+    Notes: ${notes || 'N/A'}
+    `,
+    html: `<h3>New Booking Request</h3>
+           <p><strong>Name:</strong> ${fullname}</p>
+           <p><strong>Phone:</strong> ${phone}</p>
+           <p><strong>Destination:</strong> ${destination}</p>
+           <p><strong>Travel Date:</strong> ${travelDate}</p>
+           <p><strong>Number of People:</strong> ${people}</p>
+           <p><strong>Notes:</strong><br/>${notes ? notes.replace(/\n/g, '<br/>') : 'N/A'}</p>`,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Booking email sent:', info.messageId, 'response:', info.response);
+
+    // If form is submitted via AJAX
+    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      return res.json({ success: true });
+    }
+
+    // If normal form post (non-AJAX), redirect back with success
+    res.render('index', { error: null, success: 'Booking submitted successfully!' });
+  } catch (err) {
+    console.error('❌ Booking email error:', err);
+
+    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      return res.status(500).json({ success: false, error: 'Failed to send booking email.' });
+    }
+
+    res.render('index', { error: 'Failed to submit booking. Please try again later.' });
+  }
+});
 
 
 //feedback 
