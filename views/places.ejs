@@ -8,25 +8,36 @@
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/script.js" defer></script>
   <link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
+  <!-- Font Awesome  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Odisha Tourism</div>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/places" class="active">Tourist Places</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-    <form action="/search" method="POST" class="search-form" id="searchForm">
-      <input type="text" id="searchInput" name="city" placeholder="Search a place..." autocomplete="off" required>
-      <button type="submit">🔍</button>
-      <!-- Dropdown container for suggestions -->
-      <ul id="suggestions"></ul>
-    </form>
-  </nav>
+
+<!-- Navbar -->
+<nav class="navbar">
+   <div class="logo">
+    <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+    Odisha Tourism
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="/places" class="active"><i class="fas fa-map-marked-alt"></i> Tourist Places</a></li>
+    <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+
+  <!-- Search Form -->
+  <form action="/search" method="POST" class="search-form" id="searchForm">
+    <input type="text" id="searchInput" name="city" placeholder="Search a place..." autocomplete="off" required>
+    <button type="submit"><i class="fas fa-search"></i></button>
+    
+    <!-- Dropdown container for suggestions -->
+    <ul id="suggestions"></ul>
+  </form>
+</nav>
 
   <!-- Places Section -->
   <section class="places">

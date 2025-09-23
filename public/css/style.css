@@ -884,10 +884,32 @@ a {
   padding: 12px 25px;
   flex-wrap: wrap;
 }
+/* Logo container */
 .logo {
-  font-size: 20px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;              /* space between image and text */
+  font-size: 20px;        /* adjust text size */
+  font-weight: bold;      /* bold text */
+  color: white;           /* change to match your navbar theme */
+  cursor: pointer;
 }
+
+/* Logo image */
+.logo img {
+  height: 40px;           /* adjust size */
+  width: auto;
+  border-radius: 50%;     /* makes logo circular */
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* subtle shadow */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect */
+.logo:hover img {
+  transform: scale(1.1);  /* zoom effect on hover */
+}
+
 .nav-links {
   list-style: none;
   display: flex;

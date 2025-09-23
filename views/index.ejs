@@ -40,17 +40,30 @@ a {
   width: 100%;
   z-index: 1000;
 }
-
-.navbar .logo {
+/* Logo container */
+.logo {
   display: flex;
   align-items: center;
-  font-size: 18px;
-  font-weight: bold;
+  gap: 10px;              /* space between image and text */
+  font-size: 20px;        /* adjust text size */
+  font-weight: bold;      /* bold text */
+  color: white;           /* change to match your navbar theme */
+  cursor: pointer;
 }
 
-.navbar .logo img {
-  height: 40px;
-  margin-right: 10px;
+/* Logo image */
+.logo img {
+  height: 40px;           /* adjust size */
+  width: auto;
+  border-radius: 50%;     /* makes logo circular */
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* subtle shadow */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect */
+.logo:hover img {
+  transform: scale(1.1);  /* zoom effect on hover */
 }
 
 .nav-links {
@@ -439,24 +452,31 @@ body.dark-mode .hero-text .btn {
 
 <body>
 
- <!-- Navbar -->
+<!-- Navbar -->
 <nav class="navbar">
   <div class="logo">
     <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
     Odisha Tourism
   </div>
+
   <ul class="nav-links" id="navLinks">
-    <li><a href="/" class="active">Home</a></li>
-    <li><a href="/places">Tourist Places</a></li>
-    <li><a href="/contact">Contact</a></li>
+    <li><a href="/" class="active"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="/places"><i class="fas fa-map-marked-alt"></i> Tourist Places</a></li>
+    <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
   </ul>
+
   <div style="display:flex; align-items:center; gap:15px;">
-    <div class="hamburger" id="hamburger">&#9776;</div>
+    <!-- Hamburger icon -->
+    <div class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+    <!-- Dark mode toggle -->
     <button id="darkModeToggle" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">
       <i class="fas fa-moon"></i>
     </button>
   </div>
 </nav>
+
 
   <!-- Hero Slider -->
   <section class="hero-slider" id="heroSlider">
