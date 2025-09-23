@@ -4,19 +4,335 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= data.title %> - Odisha Tourism</title>
-  <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" type="image/png" href="https://iili.io/KYTyEDg.png">
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* ===== General Styles ===== */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    /* ===== Navbar ===== */
+ /* ===== General ===== */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #043927;
+  padding: 10px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex-wrap: wrap;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+
+.navbar .logo img {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.navbar .logo:hover img {
+  transform: rotate(15deg) scale(1.1);
+  border-color: #ffd700;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar .nav-links li a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.navbar .nav-links li a::after {
+  content: '';
+  height: 2px;
+  width: 0;
+  background: #ffd700;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s;
+}
+
+.navbar .nav-links li a:hover::after,
+.navbar .nav-links li a.active::after {
+  width: 100%;
+}
+
+.navbar .nav-links li a:hover,
+.navbar .nav-links li a.active {
+  background: #065a44;
+  transform: translateY(-2px);
+}
+
+/* ===== Search Form ===== */
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-form input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+#suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #065a44;
+  color: white;
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 100;
+}
+
+#suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#suggestions li:hover {
+  background: #043927;
+  color: #ffd700;
+}
+
+/* ===== Hamburger ===== */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.hamburger:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ===== Responsive ===== */
+@media(max-width: 768px){
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: -100%;
+    flex-direction: column;
+    width: 220px;
+    background: #043927;
+    border-radius: 8px;
+    padding: 15px 0;
+    gap: 15px;
+    transition: right 0.4s ease;
+  }
+  .nav-links.show {
+    right: 10px;
+  }
+  .hamburger {
+    display: block;
+  }
+  .search-form {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .navbar .nav-links {
+    position: absolute;
+    top: 70px;
+    right: -100%;
+    flex-direction: column;
+    width: 220px;
+    background-color: #043927;
+    border-radius: 10px;
+    padding: 15px 0;
+    gap: 15px;
+    transition: right 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .navbar .nav-links.show {
+    right: 20px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+    /* ===== Hamburger Menu ===== */
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .hamburger:hover {
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    /* ===== Main Content ===== */
+    main.container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    main h1 {
+      color: #043927;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .result-img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+
+    .result-desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .read-more {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #065a44;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .read-more:hover {
+      background-color: #043927;
+      transform: translateY(-2px);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 20px;
+      }
+
+      .navbar .nav-links {
+        position: absolute;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        width: 200px;
+        background-color: #043927;
+        border-radius: 10px;
+        padding: 15px 0;
+        gap: 15px;
+        transition: right 0.4s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      }
+
+      .navbar .nav-links.show {
+        right: 20px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Odisha Tourism</div>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/places">Tourist Places</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
+ <!-- Navbar -->
+<nav class="navbar">
+  <a href="/" class="logo">
+    <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+    Odisha Tourism
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/" class="active"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="/places"><i class="fas fa-map-marked-alt"></i> Tourist Places</a></li>
+    <li><a href="/booking"><i class="fas fa-calendar-check"></i> Booking</a></li>
+    <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+
+
+  <div class="hamburger" id="hamburger">
+    <i class="fas fa-bars"></i>
+  </div>
+</nav>
 
   <!-- Result Section -->
   <main class="container">
@@ -34,5 +350,14 @@
       📖 Read more on Wikipedia
     </a>
   </main>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
 </body>
 </html>

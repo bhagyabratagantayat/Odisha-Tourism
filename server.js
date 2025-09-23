@@ -333,7 +333,7 @@ app.post('/contact', async (req, res) => {
   }
 });
 
-// booking trip
+
 
 // Booking Form Submission (POST)
 app.post('/booking', async (req, res) => {
@@ -343,19 +343,11 @@ app.post('/booking', async (req, res) => {
     return res.status(400).json({ success: false, error: 'All required fields must be filled.' });
   }
 
-  // Build mail options
   const mailOptions = {
     from: `"Booking Form" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER, // your inbox
+    to: process.env.EMAIL_USER,
     subject: `New Booking Request from ${fullname}`,
-    text: `New Booking Request:\n
-    Full Name: ${fullname}
-    Phone: ${phone}
-    Destination: ${destination}
-    Travel Date: ${travelDate}
-    People: ${people}
-    Notes: ${notes || 'N/A'}
-    `,
+    text: `New Booking Request:\nFull Name: ${fullname}\nPhone: ${phone}\nDestination: ${destination}\nTravel Date: ${travelDate}\nPeople: ${people}\nNotes: ${notes || 'N/A'}`,
     html: `<h3>New Booking Request</h3>
            <p><strong>Name:</strong> ${fullname}</p>
            <p><strong>Phone:</strong> ${phone}</p>
@@ -367,42 +359,12 @@ app.post('/booking', async (req, res) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Booking email sent:', info.messageId, 'response:', info.response);
+    console.log('✅ Booking email sent:', info.messageId);
 
-    // If form is submitted via AJAX
-    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
-      return res.json({ success: true });
-    }
-
-    // If normal form post (non-AJAX), redirect back with success
-    res.render('index', { error: null, success: 'Booking submitted successfully!' });
+    // ✅ Always return JSON for front-end
+    res.json({ success: true });
   } catch (err) {
     console.error('❌ Booking email error:', err);
-
-    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
-      return res.status(500).json({ success: false, error: 'Failed to send booking email.' });
-    }
-
-    res.render('index', { error: 'Failed to submit booking. Please try again later.' });
+    res.status(500).json({ success: false, error: 'Failed to send booking email.' });
   }
 });
-
-
-//feedback 
-
-app.get('/contact', (req, res) => {
-  res.render('contact', { error: null });
-});
-
-// Express route to render spin result
-// Spin result route
-app.get('/spinresult/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const place = touristPlaces[id];
-  if (!place) return res.redirect('/');
-  res.render('spinresult', { place });
-});
-
-
-// Start
-app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));

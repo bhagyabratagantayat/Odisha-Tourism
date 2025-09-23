@@ -10,242 +10,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
-  <style>
-    :root {
-      --peach-light: #FFECC0;
-      --peach: #FFC29B;
-      --rose: #F39F9F;
-      --maroon: #B95E82;
-      --text-dark: #333;
-      --muted: #555;
-      --deep-forest-green:#043927;
-      
-    }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--peach-light);
-      color: var(--text-dark);
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* Navbar */
-    .navbar {
-      background: var(--deep-forest-green);
-      padding: 14px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .navbar .logo {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-      gap: 10px;
-      color: white;
-    }
-    .navbar img {
-      height: 40px;
-      border-radius: 50%;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 18px;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: white;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--peach-light);
-    }
-    .hamburger {
-      display: none;
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* Contact Section */
-    .contact-section {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 0 20px;
-    }
-    .contact-card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      border-left: 6px solid var(--maroon);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    }
-    .contact-card h2 {
-      color: var(--maroon);
-      margin-bottom: 10px;
-    }
-    .muted {
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-    .contact-form {
-      display: grid;
-      gap: 16px;
-    }
-    .contact-form .row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .field {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .field label {
-      font-size: 14px;
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: var(--rose);
-    }
-    input, select, textarea {
-      padding: 12px 14px;
-      border: 1px solid var(--rose);
-      border-radius: 10px;
-      font-size: 14px;
-      transition: 0.3s;
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--maroon);
-      box-shadow: 0 0 6px rgba(185,94,130,0.4);
-      outline: none;
-    }
-    .actions {
-      display: flex;
-      gap: 12px;
-    }
-    .btn {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn.primary {
-      background: var(--rose);
-      color: #fff;
-    }
-    .btn.primary:hover {
-      background: var(--maroon);
-    }
-    .btn.ghost {
-      background: var(--peach);
-      color: var(--text-dark);
-    }
-    .btn.ghost:hover {
-      background: var(--rose);
-      color: #fff;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .info-block {
-      background: #fff;
-      padding: 20px;
-      border-radius: 14px;
-      border-left: 6px solid var(--rose);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
-    .info-block h3 {
-      margin: 0 0 6px;
-      color: var(--maroon);
-    }
-
-    /* Booking Section */
-    .booking-section {
-      max-width: 1100px;
-      margin: 40px auto 60px;
-      padding: 30px;
-      background: #fff;
-      border-radius: 16px;
-      border-top: 6px solid var(--rose);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-    .booking-section h2 {
-      text-align: center;
-      color: var(--maroon);
-      margin-bottom: 8px;
-    }
-    .booking-section p {
-      text-align: center;
-      margin-bottom: 25px;
-      color: var(--muted);
-    }
-    .booking-form {
-      display: grid;
-      gap: 18px;
-    }
-    .booking-form .row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .booking-form button {
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      background: var(--rose);
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .booking-form button:hover {
-      background: var(--maroon);
-      transform: translateY(-2px);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .contact-section {
-        grid-template-columns: 1fr;
-      }
-      .actions {
-        flex-direction: column;
-      }
-    }
-  </style>
 
 </head>
 <body>
-
 <!-- Navbar -->
 <nav class="navbar">
   <div class="logo">
-    <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+    <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo" href="/">
     Odisha Tourism
   </div>
 
   <ul class="nav-links" id="navLinks">
     <li><a href="/" class="active"><i class="fas fa-home"></i> Home</a></li>
     <li><a href="/places"><i class="fas fa-map-marked-alt"></i> Tourist Places</a></li>
+    <li><a href="/booking"><i class="fas fa-calendar-check"></i> Booking</a></li> <!-- Added Booking -->
     <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
   </ul>
 
@@ -256,6 +35,7 @@
     </div>
   </div>
 </nav>
+
 
 
   <!-- Contact Section -->
@@ -307,72 +87,76 @@
     </aside>
   </section>
 
-  <!-- Booking Section -->
-  <section class="booking-section">
-    <h2>Book Your Trip</h2>
-    <p>Plan your journey with us — fill out the booking form below.</p>
+  <!-- social media -->
 
-    <form class="booking-form" action="/booking" method="POST">
-      <div class="row">
-        <div class="field">
-          <label for="fullname">Full Name</label>
-          <input type="text" id="fullname" name="fullname" required>
-        </div>
-        <div class="field">
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" name="phone" required>
-        </div>
+  <!-- Social Media Section -->
+<!-- Social Media Section -->
+<section class="social-media-section">
+  <h2>Connect with Me</h2>
+  <div class="social-media-icons">
+    <a href="https://github.com/bhagyabratagantayat" target="_blank">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/bhagyabratagantayat" target="_blank">
+      <i class="fab fa-linkedin-in"></i> LinkedIn
+    </a>
+    <a href="https://www.instagram.com/pilu_bhai_official" target="_blank">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+    <a href="https://twitter.com/bhagyabratagantayat" target="_blank">
+      <i class="fab fa-twitter"></i> Twitter
+    </a>
+    <a href="https://www.youtube.com/@pilubhaiofficial" target="_blank">
+      <i class="fab fa-youtube"></i> YouTube
+    </a>
+    <a href="https://www.facebook.com/bhagyabratagantayat" target="_blank">
+      <i class="fab fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <!-- Branding -->
+    <div class="footer-brand">
+      <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+      <h3>Odisha Tourism</h3>
+      <p>Discover the soul of Incredible India – culture, heritage, and natural beauty of Odisha.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="/places"><i class="fas fa-map-marked-alt"></i> Tourist Places</a></li>
+        <li><a href="/booking"><i class="fas fa-calendar-check"></i> Booking</a></li>
+        <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-social">
+      <h4>Follow Us</h4>
+      <div class="social">
+        <a href="https://www.instagram.com/bhagyabratagantayat" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/bhagyabratagantayat" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/bhagyabratagantayat" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://github.com/bhagyabratagantayat" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.youtube.com/@pilubhaiofficial" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.linkedin.com/in/bhagyabratagantayat" target="_blank"><i class="fab fa-linkedin-in"></i></a>
       </div>
+    </div>
+  </div>
 
-      <div class="row">
-        <div class="field">
-          <label for="destination">Destination</label>
-          <select id="destination" name="destination" required>
-            <option value="">-- Select Place --</option>
-            <option>Puri Jagannath Temple</option>
-            <option>Konark Sun Temple</option>
-            <option>Chilika Lake</option>
-            <option>Lingaraj Temple</option>
-            <option>Dhauli Shanti Stupa</option>
-            <option>Udayagiri and Khandagiri Caves</option>
-            <option>Nandankanan Zoological Park</option>
-            <option>Hirakud Dam</option>
-            <option>Similipal National Park</option>
-            <option>Satkosia Gorge</option>
-            <option>Rajarani Temple</option>
-            <option>Ananta Vasudeva Temple</option>
-            <option>Mukteswara Temple</option>
-            <option>Khandadhar Waterfall</option>
-            <option>Bhitarkanika National Park</option>
-            <option>Chandipur Beach</option>
-            <option>Gopalpur Beach</option>
-            <option>Balasore Panchalingeswar Temple</option>
-            <option>Taratarini Temple</option>
-            <option>Biraja Temple, Jajpur</option>
-            <option>Samaleswari Temple, Sambalpur</option>
-            <option>Gupteswar Cave Temple</option>
-            <option>Mahendragiri Hill</option>
-            <option>Deomali Hill</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="travelDate">Travel Date</label>
-          <input type="date" id="travelDate" name="travelDate" required>
-        </div>
-      </div>
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>© 2025 Odisha Tourism | Designed & Developed by Bhagyabrata Gantayat</p>
+  </div>
+</footer>
 
-      <div class="field">
-        <label for="people">Number of People</label>
-        <input type="number" id="people" name="people" min="1" required>
-      </div>
 
-      <div class="field">
-        <label for="notes">Additional Notes</label>
-        <textarea id="notes" name="notes" rows="4"></textarea>
-      </div>
-
-      <button type="submit">Confirm Booking</button>
-    </form>
-  </section>
+  
 </body>
 </html>
