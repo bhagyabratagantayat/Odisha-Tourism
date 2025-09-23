@@ -891,3 +891,41 @@ footer {
     display: block;
   }
 }
+
+
+
+/* Hamburger menu icon  */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 60px; /* below navbar */
+    right: 0;
+    background: #043927;
+    flex-direction: column;
+    width: 200px;
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

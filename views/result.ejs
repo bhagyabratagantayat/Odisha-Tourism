@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/css/style.css">
   <!-- Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
   <style>
     /* ===== General Styles ===== */
     body {
@@ -17,216 +18,88 @@
       color: #333;
     }
 
+    a {
+      text-decoration: none;
+    }
+
     /* ===== Navbar ===== */
- /* ===== General ===== */
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: #f5f5f5;
-  color: #333;
-}
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #043927;
+      padding: 10px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+    }
 
-/* ===== Navbar ===== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #043927;
-  padding: 10px 30px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  flex-wrap: wrap;
-}
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      transition: transform 0.3s;
+    }
 
-.navbar .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 22px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  transition: transform 0.3s;
-}
+    .navbar .logo img {
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      border: 2px solid white;
+      transition: transform 0.3s, border-color 0.3s;
+    }
 
-.navbar .logo img {
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  border: 2px solid white;
-  transition: transform 0.3s, border-color 0.3s;
-}
+    .navbar .logo:hover img {
+      transform: rotate(15deg) scale(1.1);
+      border-color: #ffd700;
+    }
 
-.navbar .logo:hover img {
-  transform: rotate(15deg) scale(1.1);
-  border-color: #ffd700;
-}
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
 
-.navbar .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
+    .navbar .nav-links li a {
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 16px;
+      position: relative;
+      transition: all 0.3s;
+    }
 
-.navbar .nav-links li a {
-  color: white;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.3s;
-  position: relative;
-}
+    .navbar .nav-links li a::after {
+      content: '';
+      height: 2px;
+      width: 0;
+      background: #ffd700;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s;
+    }
 
-.navbar .nav-links li a::after {
-  content: '';
-  height: 2px;
-  width: 0;
-  background: #ffd700;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transition: width 0.3s;
-}
+    .navbar .nav-links li a:hover::after,
+    .navbar .nav-links li a.active::after {
+      width: 100%;
+    }
 
-.navbar .nav-links li a:hover::after,
-.navbar .nav-links li a.active::after {
-  width: 100%;
-}
+    .navbar .nav-links li a:hover,
+    .navbar .nav-links li a.active {
+      background: #065a44;
+      transform: translateY(-2px);
+    }
 
-.navbar .nav-links li a:hover,
-.navbar .nav-links li a.active {
-  background: #065a44;
-  transform: translateY(-2px);
-}
-
-/* ===== Search Form ===== */
-.search-form {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.search-form input {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-#suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background: #065a44;
-  color: white;
-  border-radius: 6px;
-  max-height: 200px;
-  overflow-y: auto;
-  display: none;
-  z-index: 100;
-}
-
-#suggestions li {
-  padding: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-#suggestions li:hover {
-  background: #043927;
-  color: #ffd700;
-}
-
-/* ===== Hamburger ===== */
-.hamburger {
-  display: none;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.hamburger:hover {
-  transform: rotate(90deg) scale(1.1);
-}
-
-/* ===== Responsive ===== */
-@media(max-width: 768px){
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    right: -100%;
-    flex-direction: column;
-    width: 220px;
-    background: #043927;
-    border-radius: 8px;
-    padding: 15px 0;
-    gap: 15px;
-    transition: right 0.4s ease;
-  }
-  .nav-links.show {
-    right: 10px;
-  }
-  .hamburger {
-    display: block;
-  }
-  .search-form {
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
-/* Hamburger Menu */
-.hamburger {
-  display: none;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.hamburger:hover {
-  transform: rotate(90deg) scale(1.1);
-}
-
-/* Responsive Navbar */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 10px 20px;
-  }
-
-  .navbar .nav-links {
-    position: absolute;
-    top: 70px;
-    right: -100%;
-    flex-direction: column;
-    width: 220px;
-    background-color: #043927;
-    border-radius: 10px;
-    padding: 15px 0;
-    gap: 15px;
-    transition: right 0.4s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
-
-  .navbar .nav-links.show {
-    right: 20px;
-  }
-
-  .hamburger {
-    display: block;
-  }
-}
-
-    /* ===== Hamburger Menu ===== */
+    /* ===== Hamburger ===== */
     .hamburger {
       display: none;
       font-size: 24px;
@@ -247,6 +120,7 @@ body {
       background-color: white;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      position: relative;
     }
 
     main h1 {
@@ -275,7 +149,6 @@ body {
       background-color: #065a44;
       color: white;
       border-radius: 8px;
-      text-decoration: none;
       transition: background 0.3s ease, transform 0.3s ease;
     }
 
@@ -284,38 +157,104 @@ body {
       transform: translateY(-2px);
     }
 
+    /* ===== Go Back Button ===== */
+    .go-back {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 8px 15px;
+      background-color: #ff9800;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .go-back:hover {
+      background-color: #e68a00;
+    }
+
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
-      .navbar {
-        padding: 10px 20px;
-      }
-
-      .navbar .nav-links {
-        position: absolute;
-        top: 70px;
-        right: -100%;
-        flex-direction: column;
-        width: 200px;
-        background-color: #043927;
-        border-radius: 10px;
-        padding: 15px 0;
-        gap: 15px;
-        transition: right 0.4s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      }
-
-      .navbar .nav-links.show {
-        right: 20px;
-      }
-
       .hamburger {
         display: block;
       }
+
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        right: -250px; /* hidden by default */
+        flex-direction: column;
+        width: 200px;
+        background-color: #043927;
+        border-radius: 8px;
+        padding: 15px 0;
+        gap: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: right 0.4s ease;
+      }
+
+      .nav-links.show {
+        right: 10px;
+      }
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background-color: #043927;
+      color: white;
+      padding: 30px 20px;
+      margin-top: 40px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-container div h4 {
+      margin-bottom: 10px;
+    }
+
+    .footer-container div ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-container div ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-container div ul li a {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      padding-top: 10px;
+      font-size: 14px;
+    }
+
+    /* Social Icons */
+    .footer-social .social a {
+      margin-right: 10px;
+      color: white;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    .footer-social .social a:hover {
+      color: #ff9800;
     }
   </style>
 </head>
 <body>
- <!-- Navbar -->
+
+<!-- Navbar -->
 <nav class="navbar">
   <a href="/" class="logo">
     <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
@@ -329,35 +268,35 @@ body {
     <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
   </ul>
 
-
   <div class="hamburger" id="hamburger">
     <i class="fas fa-bars"></i>
   </div>
 </nav>
 
-  <!-- Result Section -->
-  <main class="container">
-    <h1><%= data.title %></h1>
+<!-- Result Section -->
+<main class="container">
+  <button class="go-back" onclick="history.back();">⬅ Go Back</button>
+  <h1><%= data.title %></h1>
 
-    <% if (data.thumbnail) { %>
-      <img src="<%= data.thumbnail.source %>" 
-           alt="<%= data.title %>" 
-           class="result-img">
-    <% } %>
+  <% if (data.thumbnail) { %>
+    <img src="<%= data.thumbnail.source %>" 
+         alt="<%= data.title %>" 
+         class="result-img">
+  <% } %>
 
-    <p class="result-desc"><%= data.extract %></p>
+  <p class="result-desc"><%= data.extract %></p>
 
-    <a href="<%= data.content_urls.desktop.page %>" target="_blank" class="read-more">
-      📖 Read more on Wikipedia
-    </a>
-  </main>
+  <a href="<%= data.content_urls.desktop.page %>" target="_blank" class="read-more">
+    📖 Read more on Wikipedia
+  </a>
+</main>
 
-  <!-- Footer -->
+<!-- Footer -->
 <footer>
   <div class="footer-container">
     <!-- Branding -->
     <div class="footer-brand">
-      <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo">
+      <img src="https://i.ibb.co/sdXpQ0tv/Whats-App-Image-2025-09-19-at-23-46-25-4ba03904.jpg" alt="Odisha Logo" style="height:50px; border-radius:50%;">
       <h3>Odisha Tourism</h3>
       <p>Discover the soul of Incredible India – culture, heritage, and natural beauty of Odisha.</p>
     </div>
@@ -373,24 +312,16 @@ body {
       </ul>
     </div>
 
-     <!-- Team Credits -->
-   <div class="footer-team">
-  <h4>Our Team</h4>
-  <ul style="list-style:none; padding:0; margin:0;">
-    <li>
-      <span style="font-weight:700; color:#ff9800; font-size:17px; text-shadow:1px 1px 3px rgba(0,0,0,0.3);">
-        🌟 Bhagyabrata Gantayat
-      </span> – Team Lead & Main Developer
-    </li>
-    <li><strong>Jitendra Nial</strong> – Coding & Research</li>
-    <li><strong>Ayush Singh</strong> – Design & Frontend Support</li>
-    <li><strong>Jamana Rahul</strong> – Design, Improvement Ideas & Suggestions</li>
-  </ul>
-</div>
-
-
-
-
+    <!-- Team -->
+    <div class="footer-team">
+      <h4>Our Team</h4>
+      <ul style="list-style:none; padding:0; margin:0;">
+        <li><span style="font-weight:700; color:#ff9800;">🌟 Bhagyabrata Gantayat</span> – Team Lead & Main Developer</li>
+        <li><strong>Jitendra Nial</strong> – Coding & Research</li>
+        <li><strong>Ayush Singh</strong> – Design & Frontend Support</li>
+        <li><strong>Jamana Rahul</strong> – Design, Improvement Ideas & Suggestions</li>
+      </ul>
+    </div>
 
     <!-- Social Media -->
     <div class="footer-social">
@@ -412,14 +343,14 @@ body {
   </div>
 </footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
 
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+</script>
 
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
-  </script>
 </body>
 </html>
