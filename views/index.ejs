@@ -521,6 +521,121 @@ body.dark-mode .hero-text .btn {
   background: #ff5722;
 }
 
+
+
+/* new features */
+
+/* ---------------- Hero Section Animation ---------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1, .hero p {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: heroFadeIn 1s ease forwards;
+}
+
+.hero h1 {
+  animation-delay: 0.5s;
+}
+
+.hero p {
+  animation-delay: 1s;
+}
+
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------- Button Hover Effect ---------------- */
+button, .btn {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* ---------------- Card Hover Effect ---------------- */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ---------------- Image Hover Effect ---------------- */
+img {
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* ---------------- Fade In on Scroll ---------------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------- Section Background Animation ---------------- */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: rotateBg 10s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotateBg {
+  from { transform: rotate(0deg);}
+  to { transform: rotate(360deg);}
+}
+
+/* ---------------- Text Shadow Animation ---------------- */
+.animated-text {
+  display: inline-block;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradient 3s ease infinite;
+}
+
+@keyframes textGradient {
+  0% { background-position: 0%;}
+  50% { background-position: 100%;}
+  100% { background-position: 0%;}
+}
+
+
   </style>
 </head>
 
@@ -1140,6 +1255,34 @@ darkModeToggle.addEventListener('click', () => {
     toggleIcon.classList.add('fa-moon');
   }
 });
+
+
+
+
+
+// new features
+
+
+  const faders = document.querySelectorAll('.fade-in');
+  const options = {
+    threshold: 0.2,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer){
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, options);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+
+
 
   </script>
 

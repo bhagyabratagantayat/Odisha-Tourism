@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.static('public'));
@@ -269,6 +269,20 @@ transporter.verify((err, success) => {
 
 // ================= ROUTES ================= //
 
+
+
+// Contact Page (GET)
+app.get('/contact', (req, res) => {
+  res.render('contact', { error: null });
+});
+
+// Booking Page (GET)
+app.get('/booking', (req, res) => {
+  res.render('booking', { error: null });
+});
+
+
+
 // Home Page
 app.get('/', (req, res) => {
   res.render('index', { error: null });
@@ -304,6 +318,7 @@ app.get('/places', (req, res) => {
   res.render('places');
 });
 
+
 app.post('/contact', async (req, res) => {
   const { name, email, subject, message } = req.body || {};
 
@@ -336,6 +351,8 @@ app.post('/contact', async (req, res) => {
 
 
 // Booking Form Submission (POST)
+
+
 app.post('/booking', async (req, res) => {
   const { fullname, phone, destination, travelDate, people, notes } = req.body || {};
 
@@ -371,17 +388,6 @@ app.post('/booking', async (req, res) => {
 
 
 
-// Hamburger menu icon 
-
-// nav.js
-
-document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-
-  if(hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-  }
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
