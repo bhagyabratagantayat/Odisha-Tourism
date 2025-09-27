@@ -16,6 +16,7 @@
       font-family: 'Arial', sans-serif;
       background-color: #f5f5f5;
       color: #333;
+      transition: transform 0.4s ease;
     }
 
     a {
@@ -158,6 +159,12 @@
     }
 
     /* ===== Go Back Button ===== */
+
+    /* Prevent overlap of Go Back button and Title */
+.container h1 {
+  margin-top: 70px; /* pushes title below button */
+}
+
     .go-back {
       position: absolute;
       top: 20px;
@@ -179,24 +186,35 @@
     @media (max-width: 768px) {
       .hamburger {
         display: block;
+        z-index: 1100;
       }
 
       .nav-links {
-        position: absolute;
-        top: 70px;
+        position: fixed;
+        top: 0;
         right: -250px; /* hidden by default */
+        height: 100vh;
         flex-direction: column;
-        width: 200px;
+        width: 250px;
         background-color: #043927;
-        border-radius: 8px;
-        padding: 15px 0;
-        gap: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        border-radius: 0;
+        padding: 60px 20px;
+        gap: 20px;
+        box-shadow: -4px 0 15px rgba(0,0,0,0.3);
         transition: right 0.4s ease;
       }
 
       .nav-links.show {
-        right: 10px;
+        right: 0;
+      }
+
+      /* hide nav-links inline for mobile */
+      .navbar .nav-links {
+        display: none;
+      }
+
+      .navbar .nav-links.show {
+        display: flex;
       }
     }
 
